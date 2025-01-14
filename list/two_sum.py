@@ -11,7 +11,7 @@ def two_sum(nums, target):
             if nums[i] + nums[j] == target:
                 return True
     return False # 모든 반복문 끝나고도 target 과 같은게 없다면 False 리턴
-# print(two_sum(nums=[4, 1, 9, 7, 5, 3, 16], target=14))
+print(two_sum(nums=[4, 1, 9, 7, 5, 3, 16], target=14))
 
 ########################################################################
 
@@ -25,20 +25,16 @@ def two_pointer(nums, target):
 
     # for i in range(n):
     while l < r: # l 와 r이 같아지면 반복 탈출해야함
-        if nums[l] + nums[r] < target:
+        if nums[l] + nums[r] < target: # 타겟이 크면 왼쪽 + 1 (정렬 했기 떄문)
             l += 1
-        elif nums[l] + nums[r] > target:
+        elif nums[l] + nums[r] > target: # 타겟이 작으면 오른쪽 1 1 (정렬 했기 떄문)
             r -= 1
-        elif nums[l] + nums[r] == target:
-            # if l == r:
-            #     return False
-            # print(nums[l])
-            # print(nums[r])
+        elif nums[l] + nums[r] == target: # 같으면 True 반환
             return True
     return False
 
-print(two_pointer(nums = [2, 1 ,5, 7], target=4))
-
+print(two_pointer(nums=[2, 1 ,5, 7], target=4))
+print(two_pointer(nums=[4, 1, 9, 7, 5, 3, 16], target=14))
 
 
 
