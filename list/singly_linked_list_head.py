@@ -37,8 +37,8 @@ class LinkedList(object):
             for i in range(idx -1): # 새로운 노드를 삽입하기 직전까지 이동
                 current = current.next_node
 
-                new_node.next_node = current.next_node # 새로운 노드에 현재 노드의 다음 노드 주소 값을 넣어주고
-                current.next_node = new_node # 현재 노드에 새로운 노드를 연결
+            new_node.next_node = current.next_node # 새로운 노드에 현재 노드의 다음 노드 주소 값을 넣어주고
+            current.next_node = new_node # 현재 노드에 새로운 노드를 연결
 
     def delete(self, idx):
         if idx == 0:
