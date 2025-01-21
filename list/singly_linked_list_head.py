@@ -10,7 +10,7 @@ class LinkedList(object):
     def append(self, value):
         new_node = Node(value)
         if self.head is None:
-            self.head = new_node # 헤드가 없을 때만 new_node를 가리킴 (이후 추가는 옮겨가면 안되기 때문)
+            self.head = new_node # 헤드가 없을 때만 new_node를 가리킴
 
         else:
             current = self.head # head에 접근 (linked list에 접근하기 위함)
