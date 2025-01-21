@@ -14,7 +14,7 @@ class LinkedList(object):
 
         else:
             current = self.head # head에 접근 (linked list에 접근하기 위함)
-            while(current.next_node): # 마지막 노드(next가 None)까지 가는 반복문
+            while current.next_node: # 마지막 노드(next가 None)까지 가는 반복문
                 current = current.next_node
             current.next_node = new_node # 마지막 노드가 None 이면 반복문 빠져나와서 마지막 노드 뒤에 새로운 노드 주소값 추가
 
@@ -57,6 +57,7 @@ ll = LinkedList()
 """
 append
 """
+print("== append 값: 1 - 4 ==")
 ll.append(1)
 ll.append(2)
 ll.append(3)
@@ -65,8 +66,29 @@ ll.append(4)
 """
 get
 """
+print("== get 함수 ==")
 print(ll.get(0))
 print(ll.get(1))
 print(ll.get(2))
 print(ll.get(3))
-# ll.insert(idx = 2, value = 9)
+
+"""
+insert
+"""
+print("== insert 함수 ==")
+ll.insert(0, '( 0번쨰에 insert Node )')
+print(ll.get(0))
+print(ll.get(1))
+print(ll.get(2))
+print(ll.get(3))
+print(ll.get(4))
+
+"""
+delete
+"""
+print("== delete 함수 ==")
+ll.delete(0)
+print(ll.get(0))
+print(ll.get(1))
+print(ll.get(2))
+print(ll.get(3))
