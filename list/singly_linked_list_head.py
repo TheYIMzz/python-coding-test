@@ -3,9 +3,11 @@ class Node:
         self.value = value
         self.next_node = next_node
 
+
 class LinkedList(object):
     def __init__(self):
         self.head = None
+        self.size = 0
 
     def append(self, value):
         new_node = Node(value)
@@ -18,13 +20,24 @@ class LinkedList(object):
                 current = current.next_node
             current.next_node = new_node # 마지막 노드가 None 이면 반복문 빠져나와서 마지막 노드 뒤에 새로운 노드 주소값 추가
 
+        self.size += 1  # 배열의 크기 관리
+
+
     def get(self, idx):
+
+        if idx < 0 or idx >= self.size: # index 0-base
+            raise IndexError("Index out of range")
+
         current = self.head # head에 접근 (linked list에 접근하기 위함)
         for i in range(idx):
             current = current.next_node
         return current.value
 
     def insert(self, idx, value):
+
+        if idx < 0 or idx >= self.size: # index 0-base
+            raise IndexError("Index out of range")
+
         new_node = Node(value)
 
         if idx == 0: # 맨 앞에 삽입 시
@@ -40,7 +53,13 @@ class LinkedList(object):
             new_node.next_node = current.next_node # 새로운 노드에 현재 노드의 다음 노드 주소 값을 넣어주고
             current.next_node = new_node # 현재 노드에 새로운 노드를 연결
 
+        self.size += 1  # 배열의 크기 관리
+
     def delete(self, idx):
+
+        if idx < 0 or idx >= self.size: # index 0-base
+            raise IndexError("Index out of range")
+
         if idx == 0:
             self.head = self.head.next_node # 0 번째(head)를 삭제하면 다음 노드를 head로 설정한다.
         else:
@@ -49,6 +68,8 @@ class LinkedList(object):
             for i in range(idx -1):
                 current = current.next_node
             current.next_node = current.next_node.next_node # 현재 노드의 다음 노드를 다음 다음 노드로 변경 (가비지 컬렉터가 참조안하는 인덱스 삭제해줌)
+
+        self.size -= 1  # 배열의 크기 관리
 
 
 
@@ -71,6 +92,7 @@ print(ll.get(0))
 print(ll.get(1))
 print(ll.get(2))
 print(ll.get(3))
+print('배열의 크기: ', ll.size)
 
 """
 insert
@@ -82,7 +104,7 @@ print(ll.get(1))
 print(ll.get(2))
 print(ll.get(3))
 print(ll.get(4))
-
+print('배열의 크기: ', ll.size)
 """
 delete
 """
@@ -92,3 +114,4 @@ print(ll.get(0))
 print(ll.get(1))
 print(ll.get(2))
 print(ll.get(3))
+print('배열의 크기: ', ll.size)
