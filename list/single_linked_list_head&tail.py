@@ -82,7 +82,7 @@ class LinkedList(object):
             remove_node = cur_node.next_node
             cur_node.next_node = cur_node.next_node.next_node
 
-            if remove_node == self.tail:
+            if remove_node == self.tail:  # 삭제하려는 노드가 tail인 경우 
                 self.tail = cur_node
 
         self.size -= 1
