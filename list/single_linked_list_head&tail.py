@@ -1,6 +1,3 @@
-from os.path import curdir
-
-
 class Node:
     def __init__(self, value = 0, next_node = None):
         self.value = value
@@ -76,7 +73,7 @@ class LinkedList(object):
             remove_node = self.head
             self.head =  self.head.next_node
             if self.size == 1:  # 삭제하려고 보니 노드가 1개만 있다면
-                self.tail = 0
+                self.tail = None
 
         else: # 중간, 테일 삭제
             cur_node = self.head
