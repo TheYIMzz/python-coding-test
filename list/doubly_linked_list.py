@@ -1,8 +1,8 @@
 class Node:
     def __init__(self):
         self.value = None
-        self.pre_node = None
-        self.post_node = None
+        self.prev_node = None
+        self.next_node = None
 
 
 class DoublyLinkedList:
