@@ -14,7 +14,7 @@ def bfs(graph, start_v):
 
         for v in graph[cur_v]:  # 현재 노드의 인접 노드들을 확인
             if v not in visited:  # 아직 방문하지 않았다면
-                visited.append(v) # 방문 처리
+                visited.append(v) # 방문 처리 (미리 방문처리 하는 이유는 다른 노드가 이 노드로 가는 경로를 갖고 있다면 “아직 visited에 없네? 그럼 큐에 넣어야지” 하면서 동일 노드를 여러 번 큐에 넣는 상황 발생할 수 있음)
                 q.append(v)  # 방문한 노드 탐색 예정 q에 추가
 
     return visited
