@@ -21,3 +21,22 @@ def two_sum(nums, target):
     return False
 
 print(two_sum(nums = [4, 1, 9, 7, 5, 3, 16], target= 14))
+
+
+# set 사용
+def two_sum_set(nums, target):
+    memo = set(nums)
+    print('target: ', target)
+
+    for i in nums:
+        needed_num = target - i
+        print('needed_num: ', needed_num, '::: memo에서 찾으려는 값: ', i )
+
+        if needed_num in memo:
+            print(f'{i} 있음')
+            return True
+        else:
+            print(f'{i} 없음')
+    return False
+
+print(two_sum_set(nums = [4, 1, 9, 7, 5, 3, 16], target= 14))
