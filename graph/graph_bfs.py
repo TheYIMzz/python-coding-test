@@ -3,9 +3,6 @@ from collections import deque
 
 def bfs(graph, start_v):
 
-    if graph is None:
-        return
-
     visited = [start_v]  # 방문한 노드 리스트 (시작 노드 방문)
     q = deque([start_v])  # 탐색할 노드 q에 추가 ("ABC" 같은 문자열이면 큐에는 'A', 'B', 'C'가 각각 들어가게 되므로 list로 감싸준다.)
 
