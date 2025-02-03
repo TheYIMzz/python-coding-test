@@ -16,8 +16,8 @@ def num_is_island(grid):
     number_of_island = 0  # 섬의 개수
 
     row = len(grid)     # grid의 행(row)
-    cal = len(grid[0])  # grid의 열(col)
-    visited = [[False] * cal for _ in range(row)]  # grid와 동일한 크기의 2차원 배열 (방문 여부 추적용)
+    col = len(grid[0])  # grid의 열(col)
+    visited = [[False] * col for _ in range(row)]  # grid와 동일한 크기의 2차원 배열 (방문 여부 추적용)
 
     def bfs(x, y):
         visited[x][y] = True  # 좌표 x, y값 방문 처리
@@ -36,14 +36,14 @@ def num_is_island(grid):
                 next_y = cur_y + dy[i]
 
                 # 방문하면 안되는 좌표 조건
-                if next_x >= 0 and next_x < row and next_y >= 0 and next_y < cal:  # gred 범위를 벗어나지 않은 곳
+                if next_x >= 0 and next_x < row and next_y >= 0 and next_y < col:  # gred 범위를 벗어나지 않은 곳
                     if grid[next_x][next_y] == '1' and not visited[next_x][next_y]:  # 땅(1)인 곳, 방문하지 않은 곳
                         visited[next_x][next_y] = True
                         queue.append((next_x, next_y))
 
     # grid 순회 및 섬 개수 세기
     for i in range(row):
-        for j in range(cal):
+        for j in range(col):
             if grid[i][j] == '1' and not visited[i][j]:  # 좌표에서 값이 1이고 방문하지 않았다면 BFS를 호출한다.
                 bfs(i, j)
                 number_of_island += 1
