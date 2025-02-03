@@ -12,8 +12,8 @@ from collections import deque
         grid[i][j] is '0' or '1'
 
 """
-def num_is_island(grid):
-    number_of_island = 0  # 섬의 개수
+def number_is_island_bfs(grid):
+    number_of_islands = 0  # 섬의 개수
 
     row = len(grid)     # grid의 행(row)
     col = len(grid[0])  # grid의 열(col)
@@ -46,9 +46,9 @@ def num_is_island(grid):
         for j in range(col):
             if grid[i][j] == '1' and not visited[i][j]:  # 좌표에서 값이 1이고 방문하지 않았다면 BFS를 호출한다.
                 bfs(i, j)
-                number_of_island += 1
+                number_of_islands += 1
 
-    return number_of_island
+    return number_of_islands
 
 
 
@@ -68,4 +68,4 @@ grid_2 = [
 ]
 
 
-print(num_is_island(grid_2))
+print(number_is_island_bfs(grid_2))
