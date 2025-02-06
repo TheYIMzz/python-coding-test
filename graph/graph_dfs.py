@@ -7,13 +7,16 @@ graph = {
     'E':['AB']
 }
 
-def dfs(graph, cur_v, visited=[]):
+def dfs(graph, cur_v, visited=None):
+    if visited is None:
+        visited = []
+
     print('방문한 노드: ', visited)
     visited.append(cur_v)  # 방문한 노드 추가
 
     for v in graph[cur_v]:  
         if v not in visited:
-            visited = dfs(graph, v, visited)  # 재귀 호출된 함수에서도 graph를 참조하기 위해 넘겨줌 (여기선 그래프가 전역변수라 안해도되긴함)
+            dfs(graph, v, visited)  # 재귀 호출된 함수에서도 graph를 참조하기 위해 넘겨줌 (여기선 그래프가 전역변수라 안해도되긴함)
 
     return visited
 
