@@ -15,26 +15,53 @@
         - 1 <= n <= 100
         - grid[i][j] is 0 or 1
 """
+from collections import deque
 
-def shortest_patg_in_binary_matrix_bfs(grid):
 
+def shortest_path_in_binary_matrix_bfs(grid):
+    # print(grid)
     row = len(grid)
-    low = len(grid[0])
+    col = len(grid[0])
 
     out_put = 0
 
+    visited = [[False] * col for _ in range(row)]
+
+
     def bfs(x, y):
-        pass
+        print('현재 좌표: ', x, y)
+        queue = deque()
+        queue.append((x, y))
+
+        dx = [1, 1, -1, 1, 0, 0]
+        dy = [1, -1, 0, 0, -1, 1]
+
+        while queue:
+            cur_x, cur_y = queue.popleft()
+
+            for i in range(5):
+
+                next_x = cur_x + dx[i]
+                next_y = cur_y + dy[i]
+
+                if next_x == 0 and next_x < row and next_y == 0 and next_y < col:
+                    if not visited[next_x][next_y]:
+                        visited[x][y] = True
+                        queue.append((next_x, next_y))
+
+    if grid[0][0] == 1:
+        return -1
 
     for i in range(row):
-        for j in range(low):
-            if grid[i][j] == 0:
-                bfs(i, j)
+        for j in range(col):
+            if grid[i][j] == 0 and not visited[i][j]:
 
-            elif grid[i][j] == 1:
-                return -1
+                bfs(i, j)
+                out_put += 1
 
     return out_put
+
+
 grid_1 = [
         [0, 0, 0],
         [1, 1, 0],
@@ -47,5 +74,5 @@ grid_2 = [
         [1, 1, 0],
     ]
 
-print(shortest_patg_in_binary_matrix_bfs(grid_1)) # output = 4
-print(shortest_patg_in_binary_matrix_bfs(grid_2)) # output = -1
+print(shortest_path_in_binary_matrix_bfs(grid_1)) # output = 4
+print(shortest_path_in_binary_matrix_bfs(grid_2)) # output = -1
