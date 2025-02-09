@@ -26,7 +26,7 @@ def shortest_path_in_binary_matrix_bfs(grid):
     col = len(grid[0])
 
     if grid[0][0] != 0 or grid[row-1][col-1] != 0:
-        return -1  # 시작 vertext가 0이 아니면 -1 반환
+        return -1  # 시작 vertex가 0이 아니면 -1 반환
 
     visited = [[False] * col for _ in range(row)]
     queue = deque()
