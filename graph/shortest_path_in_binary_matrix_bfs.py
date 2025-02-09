@@ -41,8 +41,7 @@ def shortest_path_in_binary_matrix_bfs(grid):
         cur_x, cur_y, cur_len = queue.popleft()
 
         if cur_x == row -1 and cur_y == col - 1:   # 목적지 도착 시 예약된 큐 방문하지 않고 종료
-            shortest_path_len = cur_len  # 최단거리 반환
-            break
+            return cur_len  # 최단거리 반환
 
         for dx, dy in delta:
             next_x = cur_x + dx
