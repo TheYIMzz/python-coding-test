@@ -19,47 +19,41 @@ from collections import deque
 
 
 def shortest_path_in_binary_matrix_bfs(grid):
-    # print(grid)
+
+    shortest_path_len  = -1
+
     row = len(grid)
     col = len(grid[0])
 
-    out_put = 0
+    if grid[0][0] != 0 or grid[row-1][col-1] != 0:
+        return -1  # 시작 vertext가 0이 아니면 -1 반환
 
     visited = [[False] * col for _ in range(row)]
+    queue = deque()
 
+    visited[0][0] = True
+    queue.append((0, 0, 1))
 
-    def bfs(x, y):
-        print('현재 좌표: ', x, y)
-        queue = deque()
-        queue.append((x, y))
+    delta = [(-1, 0), (1, 0), (0, -1), (0, 1),    # 동서남북
+             (-1, -1), (1, -1), (1, 1), (-1, 1)]  # 대각선
 
-        dx = [1, 1, -1, 1, 0, 0]
-        dy = [1, -1, 0, 0, -1, 1]
+    while queue:
+        cur_x, cur_y, cur_len = queue.popleft()
 
-        while queue:
-            cur_x, cur_y = queue.popleft()
+        if cur_x == row -1 and cur_y == col - 1:   # 목적지 도착 시 예약된 큐 방문하지 않고 종료
+            shortest_path_len = cur_len  # 최단거리 반환
+            break
 
-            for i in range(5):
+        for dx, dy in delta:
+            next_x = cur_x + dx
+            next_y = cur_y + dy
 
-                next_x = cur_x + dx[i]
-                next_y = cur_y + dy[i]
+            if next_x >= 0 and next_x < row and next_y >= 0 and next_y < col:
+                if grid[next_x][next_y] == 0 and not visited[next_x][next_y]:
+                    visited[next_x][next_y] = True
+                    queue.append((next_x, next_y, cur_len + 1))
 
-                if next_x == 0 and next_x < row and next_y == 0 and next_y < col:
-                    if not visited[next_x][next_y]:
-                        visited[x][y] = True
-                        queue.append((next_x, next_y))
-
-    if grid[0][0] == 1:
-        return -1
-
-    for i in range(row):
-        for j in range(col):
-            if grid[i][j] == 0 and not visited[i][j]:
-
-                bfs(i, j)
-                out_put += 1
-
-    return out_put
+    return shortest_path_len
 
 
 grid_1 = [
@@ -74,5 +68,15 @@ grid_2 = [
         [1, 1, 0],
     ]
 
-print(shortest_path_in_binary_matrix_bfs(grid_1)) # output = 4
-print(shortest_path_in_binary_matrix_bfs(grid_2)) # output = -1
+grid_3 = [
+        [0, 0, 0, 1, 0, 0, 0],
+        [0, 1, 1, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 0, 0, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+    ]
+
+
+print(shortest_path_in_binary_matrix_bfs(grid_1)) # output => 4
+print(shortest_path_in_binary_matrix_bfs(grid_2)) # output => -1
+print(shortest_path_in_binary_matrix_bfs(grid_3)) # output => 9
