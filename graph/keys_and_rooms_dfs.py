@@ -28,7 +28,7 @@ def can_visit_all_rooms_set(rooms):
                 dfs(next_v)
 
 
-    dfs(0)
+    dfs(0)  # 시작 값 0
     if len(visited) == len(rooms):
         print('(set) 방문한 노드: ', visited)
         return True
