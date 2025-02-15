@@ -47,7 +47,7 @@ def can_visit_all_rooms_list(rooms):
         visited[cur_v] = True  # -> list 사용
 
         for next_v in rooms[cur_v]:
-            if visited[next_v] == False:  # -> list 사용
+            if not visited[next_v]:  # -> list 사용
                 dfs(next_v)
 
     dfs(0)
