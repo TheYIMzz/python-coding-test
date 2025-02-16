@@ -1,9 +1,9 @@
 """
- 피보나치 수열을 구할 때 메모이제이션(memoization)을 사용하여 중복 계산을 피하기
+ 피보나치 수열을 구할 때 중복 계산을 피하기
 """
 
 
-# top_down 방식
+# top_down 방식 (memoization)
 memo_td = {}  # 계산한 피보나치 값을 저장(메모이제이션)하여 같은 계산을 다시 하지 않도록 하기 위한 변수
 def fibonacci_top_down(n):
 
@@ -15,12 +15,11 @@ def fibonacci_top_down(n):
         # print('memo: ', memo_td)
     return memo_td[n]
 
-
 print(fibonacci_top_down(150))
 
 
 
-## bottom_up 방식
+## bottom_up 방식 (tabulation)
 memo_bu = {1: 1, 2 : 1}
 def fibonacci_bottom_up(n):
 
@@ -28,6 +27,5 @@ def fibonacci_bottom_up(n):
         memo_bu[i] = memo_bu[i - 1] + memo_bu[i - 2]
 
     return memo_bu[n]
-
 
 print(fibonacci_bottom_up(150))
