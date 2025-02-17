@@ -28,7 +28,9 @@ def cs_td(n):
     if n == 2:
         return 2
 
-    return cs_td(n-1) + cs_td(n-2)
+    memo_td[n] = cs_td(n - 1) + cs_td(n - 2)
+
+    return memo_td[n]
 
 print(cs_td(5))
 
