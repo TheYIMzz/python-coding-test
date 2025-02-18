@@ -20,10 +20,12 @@
 
 """
 
+
+# top down 방식
+
 memo = {}
 cost = [10, 15, 20, 17, 1]
 
-# top down 방식
 def dp(n):
 
     if n == 0 or n == 1:
