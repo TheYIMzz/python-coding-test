@@ -31,10 +31,22 @@ def unique_paths_bottom_up(m, n):
 
     print('0행과 0열 모두 1로 채운 dp_table: ', dp_table)
 
-    for r in range(1, m):  # 0번째 행과 0번째 열은 이미 1로 초기화 해뒀으니 1부터 시작
-        for c in range(1, n):
-            dp_table[r][c] = dp_table[r - 1][c] + dp_table[r][c-1]
+    for i in range(1, m):  # 0번째 행과 0번째 열은 이미 1로 초기화 해뒀으니 1부터 시작
+        for j in range(1, n):
+            dp_table[i][j] = dp_table[i - 1][j] + dp_table[i][j - 1]
+
+            print(dp_table)
+
     return dp_table[m - 1][n - 1]
 
 
 print(unique_paths_bottom_up(3, 7))
+
+
+
+# [
+#  [1,  1,  1,  1,  1,  1,  1],
+#  [1,  2,  3,  4,  5,  6,  7],
+#  [1,  3,  6, 10, 15, 21, 28]
+# ]
+
