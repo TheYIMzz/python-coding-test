@@ -26,10 +26,10 @@ def unique_path_brute_force(r, c):
 
     unuque_paths = 0
 
-    if r + 1 < 3:  # 행 0, 1, 2
-        unuque_paths += unique_path_brute_force(r + 1, c)
-    if c + 1 < 7:  # 열 0, 1, 2, 3, 4, 5, 6
-        unuque_paths += unique_path_brute_force(r, c + 1)
+    if r + 1 <= 2:  # 행 0, 1, 2
+        unuque_paths += unique_path_brute_force(r + 1, c)   # 아래쪽 이동
+    if c + 1 <= 6:  # 열 0, 1, 2, 3, 4, 5, 6
+        unuque_paths += unique_path_brute_force(r, c + 1)   # 오른쪽 이동
 
     return unuque_paths
 
@@ -45,9 +45,9 @@ def unique_path_brute_force(r, c):
     unuque_paths = 0
 
     if r - 1 >= 0:  # 행 0, 1, 2
-        unuque_paths += unique_path_brute_force(r - 1, c)
+        unuque_paths += unique_path_brute_force(r - 1, c)  # 위쪽 이동
     if c - 1 >= 0:  # 열 0, 1, 2, 3, 4, 5, 6
-        unuque_paths += unique_path_brute_force(r, c - 1)
+        unuque_paths += unique_path_brute_force(r, c - 1)  # 왼쪽 이동
 
     return unuque_paths
 
@@ -59,24 +59,29 @@ print('끝 위치부터 완전 탐색: ', unique_path_brute_force(2, 6))
 
 # grid의 끝 위치부터 하는 방식 (메모이제이션 사용)
 memo = {}
-def unique_path_memo(r, c):
+def unique_path_memo(m, n):
 
-    if r == 0 and c == 0:  # Base Case
-        memo[(r, c)] = 1
-        return memo[(r, c)]  # (r, c)라는 key에 저장된 값 반환 => 1
+    def dfs(r, c):
+        if (r, c) in memo:  # 중복 계산인지 memo에서 key를 이용해 체크
+            return memo[(r, c)]
 
-    unuque_paths = 0
+        if r == 0 and c == 0:  # Base Case
+            memo[(r, c)] = 1
+            return memo[(r, c)]  # (r, c)라는 key에 저장된 값 반환 => 1
 
-    # r -1, c -1 체크하여 0이 들어왔을 땐 불필요한 재귀 호출 방지 (0, 1 이렇게 들어오는 경우 Base Case가 아니기에 재귀 호출됨)
-    if r - 1 >= 0 :  # 행 0, 1, 2
-        unuque_paths += unique_path_memo(r - 1, c)
-    if c - 1 >= 0:  # 열 0, 1, 2, 3, 4, 5, 6
-        unuque_paths += unique_path_memo(r, c - 1)
+        unuque_paths = 0
 
-    memo[(r, c)] = unuque_paths
-    return memo[(r, c)]
+        # r -1, c -1 체크하여 0이 들어왔을 땐 불필요한 재귀 호출 방지 (0, 1 이렇게 들어오는 경우 Base Case가 아니기에 재귀 호출됨)
+        if r - 1 >= 0 :  # 행 0, 1, 2
+            unuque_paths += dfs(r - 1, c)  # 위쪽 이동
+        if c - 1 >= 0:  # 열 0, 1, 2, 3, 4, 5, 6
+            unuque_paths += dfs(r, c - 1)  # 왼쪽 이동
 
-print('메모이제이션 결과: ', unique_path_memo(2, 6))
+        memo[(r, c)] = unuque_paths
+        return memo[(r, c)]
+    return dfs(m - 1, n - 1) # 인덱스 0부터 시작하므로 -1 해준다
+
+print('메모이제이션 결과: ', unique_path_memo(3, 7))
 
 ############################################################################################
 ############################################################################################
@@ -96,12 +101,12 @@ def unique_path_dp_table(m, n):
         if dp_table[r][c] == -1:
             # r -1, c -1 체크하여 0이 들어왔을 땐 불필요한 재귀 호출 방지 (0, 1 이렇게 들어오는 경우 Base Case가 아니기에 재귀 호출됨)
             if r - 1 >= 0 :  # 행 0, 1, 2
-                unuque_paths += dfs(r - 1, c)
+                unuque_paths += dfs(r - 1, c)  # 위쪽 이동
             if c - 1 >= 0:  # 열 0, 1, 2, 3, 4, 5, 6
-                unuque_paths += dfs(r, c - 1)
+                unuque_paths += dfs(r, c - 1)  # 왼쪽 이동
 
             dp_table[r][c] = unuque_paths
         return dp_table[r][c]
-    return dfs(m - 1, n - 1)
+    return dfs(m - 1, n - 1)  # 인덱스 0부터 시작하므로 -1 해준다
 
 print('list dp table 결과: ', unique_path_dp_table(3, 7))
