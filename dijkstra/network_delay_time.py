@@ -48,9 +48,8 @@ times = [
 def network_delay_time(times, n, k):
     graph = defaultdict(list)  # 기본 값이 빈 리스트인 defaultdict 생성 (딕셔너리에 해당 키가 없으면 빈 리스트 생성 후 키값 할당)
 
-    for time in times:
+    for time in times:  # 주어진 2차원 배열의 times를 graph로 변환
         graph[time[0]].append((time[2], time[1]))   # time[0] => u,  time[2] => w,  time[1] => v
-
 
     costs = {}
     pq = []
@@ -58,7 +57,6 @@ def network_delay_time(times, n, k):
     heapq.heappush(pq, (0, k))
 
     while pq:
-
         cur_cost, cur_node = heapq.heappop(pq)
 
         if cur_node not in costs:  # 방문 여부 확인
