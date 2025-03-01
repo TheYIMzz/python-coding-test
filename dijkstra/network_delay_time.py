@@ -13,7 +13,7 @@
         1 <= ui, vi <= n
         ui != vi
         1 <= wi <= 100
-        모든(ui, vi) 쌍은 unuque 합니다.
+        모든(ui, vi) 쌍은 unuique 합니다.
 
     input: times = [[2, 1, 2], [2, 3, 5], [2, 4, 1], [4, 3, 3]], n = 4, k = 2
     output: 4
