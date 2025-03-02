@@ -45,7 +45,7 @@ times = [
 
 
 
-def network_delay_time(times, n, k):
+def network_delay_time(times, n, k):  # n (노드의 총 개수), k (출발 노드)
     graph = defaultdict(list)  # 기본 값이 빈 리스트인 defaultdict 생성 (딕셔너리에 해당 키가 없으면 빈 리스트 생성 후 키값 할당)
 
     for time in times:  # 주어진 2차원 배열의 times를 graph로 변환
