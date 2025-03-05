@@ -14,7 +14,7 @@ def combination(nums, k):
         for i in range(start, len(nums)):
             curr.append(nums[i])
             print('curr에 추가된 num: ', curr)
-            backtrack(i + 1, curr)
+            backtrack(i + 1, curr) # 현재 인덱스 i 이후의 원소들만 고려하도록 하기 위함 (1, 1 혹은 중복된 조합(예: [1, 2]와 [2, 1])을 만들지 않기 위함
             curr.pop()
             print('backtrack 후 pop: ', curr)
 
