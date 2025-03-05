@@ -8,10 +8,11 @@
 
 # 순열
 def permute(nums):
+    result = []
 
     def backtrack(curr):
         if len(curr) == len(nums): # base case
-            ans.append(curr[:])
+            result.append(curr[:])
             return
 
         for num in nums:
@@ -22,9 +23,9 @@ def permute(nums):
                 curr.pop()
                 print('backtrack 후 pop: ', curr)
 
-    ans = []
-    backtrack([])
-    return ans
+
+    backtrack(curr = [])
+    return result
 
 nums = [1, 2, 3, 4]
 
