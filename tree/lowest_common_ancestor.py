@@ -22,14 +22,14 @@ def lca(cur_node, p, q):
 
     # 공통 조상을 찾기 위한 p와 q의 위치 찾기
     if cur_node == p or cur_node == q:
-        return cur_node
+        return cur_node  # 최초 발견한 p or q 반환
 
     # 왼쪽, 오른쪽 서브트리 모두에서 각각 p 또는 q를 찾았으므로 현재 노드가 공통 조상
     elif left and right:
-        return cur_node
+        return cur_node  # 조상 노드 반환
 
     # 왼쪽이나 오른쪽 서브트리 한 곳에서만 p, q를 찾았으면 그쪽 결과를 반환하여 상위로 전달
-    return left or right
+    return left or right  # p or q 상위로 전달 (없으면 None)
 
 # 예시 트리 구성
 #         3
