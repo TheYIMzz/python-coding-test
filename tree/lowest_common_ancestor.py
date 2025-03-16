@@ -24,11 +24,11 @@ def lca(cur_node, p, q):
     if cur_node == p or cur_node == q:
         return cur_node
 
-    # 왼쪽, 오른쪽 서브트리 양쪽에서 노드가 반환되었다면 현재 노드가 p, q 의 공통조상
+    # 왼쪽, 오른쪽 서브트리 모두에서 각각 p 또는 q를 찾았으므로 현재 노드가 공통 조상
     elif left and right:
         return cur_node
 
-    # 왼쪽이나 오른쪽 서브트리 한 곳에서만 p, q를 찾았으면 그쪽 결과 반환
+    # 왼쪽이나 오른쪽 서브트리 한 곳에서만 p, q를 찾았으면 그쪽 결과를 반환하여 상위로 전달
     return left or right
 
 # 예시 트리 구성
