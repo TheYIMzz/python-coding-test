@@ -44,14 +44,14 @@ def solution(n, results):
 
         while queue:
             cur_node = queue.popleft()
-            print('현재 선수: ', cur_node)
+            print('큐에서 꺼낸 현재 노드: ', cur_node)
             for next_node in graph[cur_node]:
 
                 if not visited[next_node]:
                     visited[next_node] = True
                     queue.append(next_node)
                     count += 1
-                    print('다음 선수: ', cur_node)
+                    print('큐에 추가한 노드: ', next_node)
         return count
 
     answer = 0
