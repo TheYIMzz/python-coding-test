@@ -57,7 +57,9 @@ def solution(n, results):
     answer = 0
 
     for i in range(1, n + 1):
+        print(f'{i} 번째 반복 win_count')
         win_count = bfs(i, win)
+        print(f'{i} 번째 반복 loss_count')
         loss_count = bfs(i, loss)
 
         # 모둔 선수와의 관계가 결정되었다면 ( 자기 자신 제외로 -1)
