@@ -15,6 +15,8 @@
 from collections import deque
 
 results = [[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]
+
+# bfs 풀이
 def solution(n, results):
 
     # 선수별로 경기 결과 저장할 리스트
@@ -62,7 +64,8 @@ def solution(n, results):
         print(f'{i} 번째 반복 loss_count')
         loss_count = bfs(i, loss)
 
-        # 모둔 선수와의 관계가 결정되었다면 ( 자기 자신 제외로 -1)
+        # 모든 선수와의 관계가 결정되었다면 ( 자기 자신 제외로 -1)
+        # 시작 노드를 이미 방문했다고 표시하지만 결과(count)에 포함시키지 않기 때문에 n에서 자기자신을 뺀다.)
         if win_count + loss_count == n - 1:
             answer += 1
 
