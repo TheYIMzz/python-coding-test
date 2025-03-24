@@ -34,7 +34,7 @@ def solution(n, results):
         return visited
 
     answer = 0
-    for i in range(n + 1):
+    for i in range(1, n + 1):
         win_result = dfs(i, win_graph, set())
         loss_result = dfs(i, loss_graph, set())
 
