@@ -33,8 +33,8 @@ def main(n, m, v, vertext):
     # 번호가 작은 정점(노드)을 먼저 방문하도록 인접 리스트를 오름차순 정렬
     print('정렬 전 그래프: ', graph)
 
-    for neighbor in graph:
-        neighbor.sort()
+    for sort_graph in graph:
+        sort_graph.sort()
     print('정렬 후 그래프: ', graph)
 
     # DFS 탐색
