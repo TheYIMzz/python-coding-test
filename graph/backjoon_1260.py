@@ -20,9 +20,24 @@
 
     ** 백준에서 문제 채점 시 입출력 방식 백준에 맞게 변경 필요 **
 """
+import sys
 from collections import deque
 
 def main(n, m, v, vertext):
+    """
+    ### 백준 제출용 ###
+    input = sys.stdin.read
+    data = input().split("\n")
+
+    # 첫 줄 입력값
+    n, m, v = map(int, data[0].split())
+
+    graph = [[] for _ in range(n + 1)]
+    for i in range(1, m + 1):
+        a, b = map(int, data[i].split())
+        graph[a].append(b)
+        graph[b].append(a)
+    """
 
     graph = [[] for _ in range(n + 1)]
 
@@ -45,6 +60,11 @@ def main(n, m, v, vertext):
     # BFS 탐색
     order_bfs = bfs(graph, v)
 
+    """
+    # 백준 제출용 결과 출력
+    print(" ".join(map(str, dfs_result)))
+    print(" ".join(map(str, bfs_result)))
+    """
     return order_dfs, order_bfs
 
 def dfs(graph, v, visited, order):
