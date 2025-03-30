@@ -17,27 +17,10 @@
         1 2
         3 4
         3 1
-
-    ** 백준에서 문제 채점 시 입출력 방식 백준에 맞게 변경 필요 **
 """
-import sys
 from collections import deque
 
 def main(n, m, v, vertext):
-    """
-    ### 백준 제출용 ###
-    input = sys.stdin.read
-    data = input().split("\n")
-
-    # 첫 줄 입력값
-    n, m, v = map(int, data[0].split())
-
-    graph = [[] for _ in range(n + 1)]
-    for i in range(1, m + 1):
-        a, b = map(int, data[i].split())
-        graph[a].append(b)
-        graph[b].append(a)
-    """
 
     graph = [[] for _ in range(n + 1)]
 
@@ -49,7 +32,7 @@ def main(n, m, v, vertext):
     print('정렬 전 그래프: ', graph)
 
     for sort_graph in graph:
-        sort_graph.sort()
+        sort_graph.sort()  # sort_graph는 graph의 요소를 참조하기 때문에 graph의 요소가 정렬된다
     print('정렬 후 그래프: ', graph)
 
     # DFS 탐색
@@ -60,16 +43,13 @@ def main(n, m, v, vertext):
     # BFS 탐색
     order_bfs = bfs(graph, v)
 
-    """
-    # 백준 제출용 결과 출력
-    print(" ".join(map(str, dfs_result)))
-    print(" ".join(map(str, bfs_result)))
-    """
     return order_dfs, order_bfs
 
 def dfs(graph, v, visited, order):
+
     visited[v] = True
     order.append(v)  # 방문한 정점(노드)들의 순서를 저장
+
     for next_node in graph[v]:
         if not visited[next_node]:
             dfs(graph, next_node, visited, order)
@@ -80,16 +60,16 @@ def bfs(graph, start):
     visited = [False] * len(graph)
     visited[start] = True
     queue = deque([start])
-
     order = []
+
     while queue:
         cur_node = queue.popleft()
         order.append(cur_node)  # 방문한 정점(노드)들의 순서를 저장
+
         for next_node in graph[cur_node]:
             if not visited[next_node]:
                 visited[next_node] = True
                 queue.append(next_node)
-
     return order
 
 
@@ -103,3 +83,69 @@ print('bfs_order: ', bfs_order)
 dfs_order2, bfs_order2 = main(5, 5 , 3, vertext2)
 print('dfs_order2: ', dfs_order2)
 print('bfs_order2: ', bfs_order2)
+
+
+
+## 백준 제출용 ##
+"""
+import sys
+from collections import deque
+
+def dfs(graph, v, visited, order):
+
+    visited[v] = True
+    order.append(v)
+    
+    for next_node in graph[v]:
+        if not visited[next_node]:
+            dfs(graph, next_node, visited, order)
+
+
+def bfs(graph, start):
+
+    visited = [False] * len(graph)
+    visited[start] = True
+    queue = deque([start])
+    order = []
+    
+    while queue:
+        cur_node = queue.popleft()
+        order.append(cur_node)
+        
+        for next_node in graph[cur_node]:
+            if not visited[next_node]:
+                visited[next_node] = True
+                queue.append(next_node)
+    return order
+
+
+def main():
+    input = sys.stdin.readline
+    n, m, v = map(int, input().split())
+    graph = [[] for _ in range(n + 1)]
+
+    for _ in range(m):
+        a, b = map(int, input().split())
+        graph[a].append(b)
+        graph[b].append(a)
+
+    # 번호가 작은 정점을 먼저 방문하도록 인접 리스트를 오름차순 정렬
+    for neighbors in graph:
+        neighbors.sort()
+
+    # DFS 탐색
+    visited_dfs = [False] * (n + 1)
+    order_dfs = []
+    dfs(graph, v, visited_dfs, order_dfs)
+
+    # BFS 탐색
+    order_bfs = bfs(graph, v)
+
+    # 결과 출력 (각 정점을 공백으로 구분하여 한 줄에 출력)
+    print(" ".join(map(str, order_dfs)))
+    print(" ".join(map(str, order_bfs)))
+
+
+if __name__ == "__main__":
+    main()
+"""
