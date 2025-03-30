@@ -62,9 +62,11 @@ def main():
         graph[a].append(b)
         graph[b].append(a)
 
-    # 번호가 작은 정점을 먼저 방문하도록 인접 리스트를 오름차순 정렬
-    for sorted_graph in graph:
-        sorted_graph.sort()
+    # 번호가 작은 정점(노드)을 먼저 방문하도록 인접 리스트를 오름차순 정렬
+    print('정렬 전 그래프: ', graph)
+    for sort_graph in graph:
+        sort_graph.sort()  # sort_graph는 graph의 요소를 참조하기 때문에 graph의 요소가 정렬된다
+    print('정렬 후 그래프: ', graph)
 
     # DFS 탐색
     visited_dfs = [False] * (n + 1)
