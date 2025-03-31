@@ -24,8 +24,6 @@ from collections import deque
 
 def main(graph, row, col):
 
-    row = len(graph)
-    col = len(graph[0])
     visited = [[False] * col for _ in range(row)]
 
     def bfs(x, y):
@@ -81,19 +79,20 @@ test_input = """2
 sys.stdin = io.StringIO(test_input)  # 백준 제출 시 제거
 
 t = int(sys.stdin.readline())
-results = []
+results = []  # t 별로 저장할 결과
 
 for _ in range(t):
     col, row, k = map(int, sys.stdin.readline().split())
-    graph = [[0] * col for _ in range(row)]
+    graph = [[0] * col for _ in range(row)] # 밭
 
     for _ in range(k):
         x, y = map(int, sys.stdin.readline().split())
-        graph[y][x] = 1  # 배추 위치 설정
+        graph[y][x] = 1  # 밭의 배추 위치 설정 (파이썬 2차원 배열은 세로가 먼저, 가로가 나중이므로 [y][x])
 
     result = main(graph, row, col)
     results.append(result)
 
+# 결과 출력
 for res in results:
     print(res)
 
