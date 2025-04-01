@@ -40,6 +40,15 @@ graph2 = {
     4: [2, 5],
     5: [1, 2, 3, 4],
 }
+"""
+    무방향 인접리스트 만드는 방법
+    for _ in range(m):
+        u, v = map(int, input().split())
+        graph[u].append(v)
+        graph[v].append(u)
+"""
+
+
 
 # 암시적 그래프 (implicit graph)
 # 연결 관계가 표현되어 있지 않아도 좌표를 이용해 연결된 버텍스를 암시적으로 알 수 있다
@@ -50,3 +59,9 @@ graph3 = [
     [1, 0, 0, 0, 0],
     [1, 1, 1, 1, 1],
 ]
+"""
+    암시적 그래프 만드는 방법
+    for _ in range(k):
+        x, y = map(int, sys.stdin.readline().split())
+        graph[y][x] = 1 # 파이썬 2차원 배열은 세로가 먼저, 가로가 나중이므로 [y][x]
+"""
