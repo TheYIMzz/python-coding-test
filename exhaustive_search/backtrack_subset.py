@@ -17,7 +17,7 @@ def subset(nums):
             print(f'현재 i: {i}')
             curr.append(nums[i])
             print('curr에 추가된 num: ', curr)
-            backtrack(i + 1, curr)
+            backtrack(i + 1, curr)  # nums에서 현재 인덱스번째 뒤쪽의 원소들만 선택하게 해서 중복 없이, 순서대로 조합을 만들기 위함
             curr.pop()
             print('backtrack 후 pop: ', curr)
 
