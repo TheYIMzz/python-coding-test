@@ -25,16 +25,21 @@ test_input = """5 0
 """
 
 sys.stdin = io.StringIO(test_input)
-n, s = map(int, input().split())
-nums = list(map(int, input().split()))
+n, s = map(int, sys.stdin.readline().split())
+nums = list(map(int, sys.stdin.readline().split()))
+
 count = 0
 
 def dfs(index, current_sum):
     global count
+
+    print('current_sum: ', current_sum)
+
     if index == n:
         if current_sum == s:
             count += 1
         return
+    print(f'nums[{index}]:', nums[index])
     dfs(index + 1, current_sum + nums[index])
     dfs(index + 1, current_sum)
 
