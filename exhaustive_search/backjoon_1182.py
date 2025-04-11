@@ -31,7 +31,7 @@ count = 0
 
 def back_track(start, curr):
     global count
-    if sum(curr) == s and len(curr) > 0:
+    if sum(curr) == s and len(curr) > 0:  # len(curr) > 0 공집합 제외 조건
         count += 1
 
     for i in range(start, n):
