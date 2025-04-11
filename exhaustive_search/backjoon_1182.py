@@ -19,33 +19,25 @@
 import io
 import sys
 
-
 test_input = """5 0
 -7 -3 -2 5 8
 """
 
 sys.stdin = io.StringIO(test_input)
+
 n, s = map(int, sys.stdin.readline().split())
 nums = list(map(int, sys.stdin.readline().split()))
-
 count = 0
 
-def dfs(index, current_sum):
+def back_track(start, curr):
     global count
+    if sum(curr) == s and len(curr) > 0:
+        count += 1
 
-    print('current_sum: ', current_sum)
+    for i in range(start, n):
+        curr.append(nums[i])
+        back_track(i + 1, curr)
+        curr.pop()
 
-    if index == n:
-        if current_sum == s:
-            count += 1
-        return
-    print(f'nums[{index}]:', nums[index])
-    dfs(index + 1, current_sum + nums[index])
-    dfs(index + 1, current_sum)
-
-dfs(0, 0)
-
-if s == 0:
-    count -= 1
-
+back_track(start=0, curr=[])
 print(count)
