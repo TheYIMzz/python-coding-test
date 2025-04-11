@@ -11,10 +11,10 @@ def combination(nums, k):
             result.append(curr[:])
             return
 
-        for i in range(start, len(nums)):
+        for i in range(start, len(nums)): # 시작범위에 start를 지정해서 증가된 i를 넘겨받아서 start로 사용해서 재귀호출된 함수에서 매번 0부터 시작하는 것 방지
             curr.append(nums[i])
             print('curr에 추가된 num: ', curr)
-            backtrack(i + 1, curr) # 현재 인덱스 i 이후의 원소들만 고려하도록 하기 위함 (1, 1 혹은 중복된 조합(예: [1, 2]와 [2, 1])을 만들지 않기 위함
+            backtrack(i + 1, curr) # nums에서 현재 인덱스번째 뒤쪽의 원소들만 선택하게 해서 중복 없이, 순서대로 조합을 만들기 위함 (예: [1, 2]와 [2, 1])
             curr.pop()
             print('backtrack 후 pop: ', curr)
 
