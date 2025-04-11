@@ -36,8 +36,10 @@ def back_track(start, curr):
 
     for i in range(start, n):
         curr.append(nums[i])
+        print(f'nums[{i}] append: ', curr)
         back_track(i + 1, curr)
         curr.pop()
+        print(f'nums[{i}] pop: ', curr)
 
 back_track(start=0, curr=[])
 print(count)
