@@ -35,6 +35,7 @@ def back_track(start, curr):
         count += 1
 
     for i in range(start, n):
+        print(f'현재 start: {start}')
         curr.append(nums[i])
         print(f'nums[{i}] append: ', curr)
         back_track(i + 1, curr)
