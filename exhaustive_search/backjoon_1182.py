@@ -37,7 +37,7 @@ def back_track(start, curr):
     for i in range(start, n):
         print(f'현재 start: {start}')
         curr.append(nums[i])
-        print(f'nums[{i}] append: ', curr)
+        print(f'nums[{i}] append: ', curr, f'넘겨받은 start {start}의 남은 for문 {i} 번째 반복 처리')
         back_track(i + 1, curr)
         curr.pop()
         print(f'nums[{i}] pop: ', curr)
