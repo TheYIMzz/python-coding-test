@@ -32,5 +32,38 @@
     1213121
 """
 
+import sys
+import io
+sys.setrecursionlimit(10**7)
+test_input = """7
+"""
+
+sys.stdin = io.StringIO(test_input)
+n = int(sys.stdin.readline().strip())
+nums = [1, 2, 3]
+
+# 뒤쪽을 검사해서 XX 패턴이 있는지 체크
+def is_good(seq):
+    l = len(seq)
+    # k 는 반복 블록의 길이
+    for k in range(1, l//2 + 1):
+        if seq[-k:] == seq[-2*k:-k]:
+            return False
+    return True
+
+def dfs(curr):
+    # 목표 길이 도달하면 결과 출력 후 종료
+    if len(curr) == n:
+        print(''.join(map(str, curr)))
+        sys.exit(0)
+
+    for num in nums:
+        curr.append(num)
+        if is_good(curr):
+            dfs(curr)
+        curr.pop()
+
+# 탐색 시작
+dfs([])
 
 
