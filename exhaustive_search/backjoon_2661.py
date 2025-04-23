@@ -14,6 +14,7 @@
     32
     32123
     1232123
+        => 좋은 수열은 연속된 블록이 두 번 반복되는 패턴(XX)이 없는 것
 
     길이가 N인 좋은 수열들을 N자리의 정수로 보아 그중 가장 작은 수를 나타내는 수열을 구하는 프로그램을 작성하라.
     예를 들면, 1213121과 2123212는 모두 좋은 수열이지만 그 중에서 작은 수를 나타내는 수열은 1213121이다.
@@ -42,16 +43,23 @@ sys.stdin = io.StringIO(test_input)
 n = int(sys.stdin.readline().strip())
 nums = [1, 2, 3]
 
-# 뒤쪽을 검사해서 XX 패턴이 있는지 체크
+# 뒤쪽을 검사해서 XX 패턴이 있는지 체크하는 함수
 def is_good(seq):
     l = len(seq)
+
+    print('반복전 seq: ', seq)
     # k 는 반복 블록의 길이
-    for k in range(1, l//2 + 1):
-        if seq[-k:] == seq[-2*k:-k]:
+    for k in range(1, l//2 + 1):  # 좋은 수열을 판단하기 위해 블록은 2개가 필요하므로 2로 나누고 소수점은 필요없으니 버리고 range가 -1까지 가므로 +1 더해준다
+        print(seq)
+        print('k=', k)
+        print('seq[-k:]: ', seq[-k:])
+        print('seq[-2*k]: ', seq[-2 * k])
+        print('seq[-2*k:-k]: ', seq[-2 * k:-k])
+        if seq[-k:] == seq[-2 * k:-k]: # 뒤에서 k개 요소(seq[-k:])와 그 앞 k개 요소(seq[-2*k:-k])를 잘라와 비교, 같다면 나쁜수열
             return False
     return True
 
-def dfs(curr):
+def back_track(curr):
     # 목표 길이 도달하면 결과 출력 후 종료
     if len(curr) == n:
         print(''.join(map(str, curr)))
@@ -59,11 +67,14 @@ def dfs(curr):
 
     for num in nums:
         curr.append(num)
+        print('append 후 curr: ', curr)
         if is_good(curr):
-            dfs(curr)
+            back_track(curr)
+        print(curr)
         curr.pop()
+        print('pop 후 curr: ', curr)
 
 # 탐색 시작
-dfs([])
+back_track([])
 
 
