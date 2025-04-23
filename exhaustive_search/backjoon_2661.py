@@ -51,10 +51,8 @@ def is_good(seq):
     # k 는 반복 블록의 길이
     for k in range(1, l//2 + 1):  # 좋은 수열을 판단하기 위해 블록은 2개가 필요하므로 2로 나누고 소수점은 필요없으니 버리고 range가 -1까지 가므로 +1 더해준다
         print(seq)
-        print('k=', k)
-        print('seq[-k:]: ', seq[-k:])
-        print('seq[-2*k]: ', seq[-2 * k])
-        print('seq[-2*k:-k]: ', seq[-2 * k:-k])
+        print('k =', k)
+        print(f'수열비교:  {seq[-k:]} == {seq[-2 * k:-k]}' )
         if seq[-k:] == seq[-2 * k:-k]: # 뒤에서 k개 요소(seq[-k:])와 그 앞 k개 요소(seq[-2*k:-k])를 잘라와 비교, 같다면 나쁜수열
             return False
     return True
@@ -66,12 +64,12 @@ def back_track(curr):
         sys.exit(0)
 
     for num in nums:
-        curr.append(num)
+        curr.append(num)  # 1. 선택
         print('append 후 curr: ', curr)
-        if is_good(curr):
+        if is_good(curr):  # 2. 탐색
             back_track(curr)
         print(curr)
-        curr.pop()
+        curr.pop()  # 3. 되돌리기
         print('pop 후 curr: ', curr)
 
 # 탐색 시작

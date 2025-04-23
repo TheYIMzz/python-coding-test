@@ -17,10 +17,10 @@ def permute(nums):
 
         for num in nums:
             if num not in curr:
-                curr.append(num)
+                curr.append(num)    # 1. 선택
                 print('curr에 추가된 num: ', curr)
-                backtrack(curr)
-                curr.pop()
+                backtrack(curr)   # 2. 탐색
+                curr.pop()  # 3. 되돌리기
                 print('backtrack 후 pop: ', curr)
 
 
