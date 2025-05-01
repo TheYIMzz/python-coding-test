@@ -44,17 +44,50 @@
     예제 출력 5
     0.008845493197441101
 """
-
 import sys
 import io
+sys.setrecursionlimit(10**7)
 
-test_input = """2 25 25 25 25"""
+
+test_input = """2 25 25 25 25
+"""
 sys.stdin = io.StringIO(test_input)
 
-n, east, west,south, north = sys.stdin.readline().strip().split()
-print(n)
+n, east, west, south, north = map(int, sys.stdin.readline().strip().split())
+probs = [east/100, west/100, south/100, north/100]
 
 
-def back_track(curr):
+def main():
+
+    result = 0.0
+
+    size = 2 * n + 1
+    visited = [[False] * size for _ in range(size)]
+
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+
+    def back_track(x, y, depth, prob):
+
+        nonlocal result
+
+        if depth == n:
+            result += prob
+            return
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if not visited[nx][ny]:
+                visited[nx][ny] = True
+                back_track(nx, ny, depth + 1, prob * probs[i])
+                visited[nx][ny] = False
 
 
+    visited[n][n] = True
+    back_track(n, n, 0, 1.0)
+    print(result)
+
+
+main()
