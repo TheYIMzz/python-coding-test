@@ -14,10 +14,10 @@ def two_sum():
 
         for i in range(start, len(nums)):
             curr.append(i)  # 인덱스 추가
-            print('현재 인덱스:', i)
+            print('현재 i값:', i)
             backtrack_result = back_track(i + 1, curr)
             print('curr: ', curr)
-            print('backtrack_result: ', backtrack_result, i)
+            print('backtrack_result: ', backtrack_result, '/ i 값: ', i)
 
             if backtrack_result:  # 재귀 호출결과에서 두 수의 인덱스 리스트를 찾았다면
                 print('두 수 합 찾은 결과: ', backtrack_result)
