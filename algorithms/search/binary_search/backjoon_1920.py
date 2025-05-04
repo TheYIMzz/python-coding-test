@@ -52,15 +52,15 @@ def binary_search(a, x):
 
     # 탐색 구간
     lo = 0
-    hi = len(a) - 1
+    hi = len(a)
 
-    while lo <= hi:
+    while lo < hi:
         mid = (lo + hi) // 2  # 탐색 대상 List를 반으로 나눈다.
 
         if a[mid] < x:
             lo = mid + 1  # a[mid]가 x보다 작다 → x는 a의 중간값보다 크다 → 오른쪽 절반 탐색 (mid+1 … hi)
         else: # 중복된 x 중 가장 왼쪽이 진짜 삽입 지점이므로 계속 탐색
-            hi = mid - 1  # a[mid]가 x보다 크다 → x는 a의 중간값보다 작다 → 왼쪽 절반 탐색 (lo … mid-1)
+            hi = mid  # a[mid]가 x보다 크거나 같다 → x는 a의 중간값보다 작거나 같다 → 왼쪽 절반 탐색 (lo … mid)
     print('lo: ', lo)
     return lo
 
