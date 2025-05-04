@@ -78,6 +78,8 @@ main()
 
 
 
+
+## 이분탐색 기본
 # def binary_search_exists(target_list, x):
 #     lo = 0
 #     hi = len(target_list)
