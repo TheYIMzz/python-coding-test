@@ -70,7 +70,7 @@ def binary_search(target_list, x):
 def main():
 
     for num in m_nums:
-
+        # idx = bisect.bisect_left(n_nums, num)
         idx = binary_search(n_nums, num)  # 직접구현 사용
         print(1 if idx < n and n_nums[idx] == num else 0)
 
