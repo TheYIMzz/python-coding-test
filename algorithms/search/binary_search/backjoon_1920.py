@@ -80,15 +80,15 @@ main()
 
 
 ## 이분탐색 기본
-# def binary_search_exists(target_list, x):
-#     lo = 0
-#     hi = len(target_list)
-#     while lo < hi:
-#         mid = (lo + hi) // 2
-#         if target_list[mid] == x:
-#             return True          # 찾았으니 바로 종료
-#         elif target_list[mid] < x:
-#             lo = mid + 1         # 오른쪽 절반으로
-#         else:
-#             hi = mid         # 왼쪽 절반으로
-#     return False
+def binary_search_exists(target_list, x):
+    lo = 0
+    hi = len(target_list)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if target_list[mid] == x:
+            return True          # 찾았으니 바로 종료
+        elif target_list[mid] < x:
+            lo = mid + 1         # 오른쪽 절반으로
+        else:
+            hi = mid         # 왼쪽 절반으로
+    return False
