@@ -44,6 +44,8 @@ m_nums = list(map(int, sys.stdin.readline().strip().split()))
 
 n_nums.sort()  # 이분 탐색을 수행할 배열 정렬
 
+print('정렬된 n_nums (탐색 대상): ', n_nums)
+print('찾을 m_nums 리스트: ', m_nums)
 
 # 이분탐색 직접 구현
 def binary_search(a, x):
@@ -57,9 +59,9 @@ def binary_search(a, x):
 
         if a[mid] < x:
             lo = mid + 1  # a[mid]가 x보다 작다 → x는 a의 중간값보다 크다 → 오른쪽 절반 탐색 (mid+1 … hi)
-        else:
+        else: # 중복된 x 중 가장 왼쪽이 진짜 삽입 지점이므로 계속 탐색
             hi = mid - 1  # a[mid]가 x보다 크다 → x는 a의 중간값보다 작다 → 왼쪽 절반 탐색 (lo … mid-1)
-
+    print('lo: ', lo)
     return lo
 
 
@@ -73,3 +75,18 @@ def main():
 
 main()
 
+
+
+
+
+# def binary_search_exists(a, x):
+#     lo, hi = 0, len(a) - 1
+#     while lo <= hi:
+#         mid = (lo + hi) // 2
+#         if a[mid] == x:
+#             return True          # 찾았으니 바로 종료
+#         elif a[mid] < x:
+#             lo = mid + 1         # 오른쪽 절반으로
+#         else:
+#             hi = mid - 1         # 왼쪽 절반으로
+#     return False
