@@ -63,7 +63,7 @@ def binary_search(target_list, x):
         else:  # 중복된 x 중 가장 왼쪽이 진짜 삽입 지점이므로 계속 탐색
             hi = mid  # a[mid]가 x보다 크거나 같다 → x는 a의 중간값보다 작거나 같다 → 왼쪽 절반 탐색 (lo … mid)
     print('lo: ', lo)
-    return lo
+    return lo  # lo는 반복이 끝난 순간 “x가 들어가거나 x가 실제로 위치한 가장 왼쪽 인덱스”를 가리키고 있기 때문에 반환
 
 
 
