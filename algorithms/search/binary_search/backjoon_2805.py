@@ -39,8 +39,8 @@
 import io
 import sys
 
-test_input = """4 7
-20 15 10 17
+test_input = """5 20
+4 42 40 26 46
 """
 sys.stdin = io.StringIO(test_input)
 
@@ -67,8 +67,10 @@ def binary_search():
         #  획득한 나무가 필요치(m) 이상 되는지 확인
         if wood >= m:
             result = mid
+            print('나무가 필요치 이상인 경우 mid 값: ', mid)
             low = mid + 1
         else:
+            print('나무가 필요치 미만인 경우 mid 값: ', mid)
             high = mid  # 나무가 부족하면 톱 높이 낮춘다
 
     print(result)
