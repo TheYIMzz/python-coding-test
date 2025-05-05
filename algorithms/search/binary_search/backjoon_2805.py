@@ -64,9 +64,11 @@ def binary_search():
             if t > mid:
                 wood += t - mid  # 현재 나무 길이 - 현재 톱 높이
 
+        print('획득한 wood: ', wood)
+
         #  획득한 나무가 필요치(m) 이상 되는지 확인
         if wood >= m:
-            result = mid
+            result = mid  # 현재까지 만족하는 값 저장
             print('나무가 필요치 이상인 경우 mid 값: ', mid)
             low = mid + 1
         else:
