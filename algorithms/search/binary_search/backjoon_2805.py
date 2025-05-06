@@ -49,10 +49,10 @@ sys.stdin = io.StringIO(test_input)
 
 def binary_search():
     n, m = map(int, sys.stdin.readline().strip().split())
-    trees = list(map(int, sys.stdin.readline().strip().split()))
+    tree_list = list(map(int, sys.stdin.readline().strip().split()))
 
     low = 0
-    high = max(trees)
+    high = max(tree_list)
     result = 0
 
     while low < high:
@@ -60,7 +60,7 @@ def binary_search():
 
         wood = 0 # mid 높이로 자를 때 얻을 수 있는 나무 길이 총합
 
-        for t in trees:
+        for t in tree_list:
             if t > mid:
                 wood += t - mid  # 현재 나무 길이 - 현재 톱 높이
 
