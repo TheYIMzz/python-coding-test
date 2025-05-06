@@ -32,3 +32,60 @@
     예제 출력 1
     200
 """
+
+import sys
+import io
+
+
+test_input = """4 11
+802
+743
+457
+539
+"""
+sys.stdin = io.StringIO(test_input)
+
+def binary_search():
+
+    k, n = map(int, sys.stdin.readline().strip().split())
+
+    len_line_list = []
+
+    for _ in range(k):
+        data = sys.stdin.readline().strip().split()
+        len_line_list.append(int(data[0]))
+
+    print(len_line_list)
+
+
+    """
+    나눗셈/곱셈이 들어가는 이진탐색은 mid가 0이 될 경우 0으로 나누기(ZeroDivisionError)가 발생하거나 곱셈 결과가 모두 0이 돼 탐색이 무한 루프에 빠질 수 있으므로, 최소 값을 1로 설정
+    """
+    low = 1
+    high = max(len_line_list)
+    result = 0
+
+    while low < high:
+
+        mid = (low + high) // 2
+
+        count = 0
+
+        for len_line in len_line_list:
+            print('len_line: ', len_line)
+            count += len_line // mid
+
+        print("count: ", count, "mid: ", mid)
+
+        if count >= n:
+            result = mid
+            low = mid + 1
+
+        else:
+            high = mid
+
+    print(result)
+
+
+binary_search()
+
