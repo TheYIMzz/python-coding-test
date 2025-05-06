@@ -65,7 +65,7 @@ def binary_search():
     high = max(len_line_list)
     result = 0
 
-    while low < high:
+    while low <= high:
 
         mid = (low + high) // 2
 
@@ -82,7 +82,7 @@ def binary_search():
             low = mid + 1
 
         else:
-            high = mid
+            high = mid - 1
 
     print(result)
 
