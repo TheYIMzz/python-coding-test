@@ -52,8 +52,7 @@ def binary_search():
     len_line_list = []
 
     for _ in range(k):
-        data = sys.stdin.readline().strip().split()
-        len_line_list.append(int(data[0]))
+        len_line_list.append(int(sys.stdin.readline().strip().split()[0]))
 
     print(len_line_list)
 
