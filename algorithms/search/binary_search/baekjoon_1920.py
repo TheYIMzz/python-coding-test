@@ -50,22 +50,19 @@ print('찾을 m_nums 리스트: ', m_nums)
 # 이분탐색 직접 구현
 def binary_search(target_list, x):
 
-    lo = 0
-    hi = len(target_list)
+    low = 0
+    high = len(target_list) -1  # high를 len(target_list)로 잡고 mid를 (low + high) // 2로 계산하기 때문에 mid == len(target_list)이 나오면 인덱스 초과 오류로 -1한다.
 
-    while lo < hi:
+    while low <= high:
 
-        mid = (lo + hi) // 2   # 탐색 대상 List를 반으로 나눈다.
+        mid = (low + high) // 2
 
         if target_list[mid] < x:
-            lo = mid + 1  # a[mid]가 x보다 작다 → x는 a의 중간값보다 크다 → 오른쪽 절반 탐색 (mid+1 … hi)
-
-        else:  # 중복된 x 중 가장 왼쪽이 진짜 삽입 지점이므로 계속 탐색
-            hi = mid  # a[mid]가 x보다 크거나 같다 → x는 a의 중간값보다 작거나 같다 → 왼쪽 절반 탐색 (lo … mid)
-    print('lo: ', lo)
-    return lo  # lo는 반복이 끝난 순간 “x가 들어가거나 x가 실제로 위치한 가장 왼쪽 인덱스”를 가리키고 있기 때문에 반환
-
-
+            low = mid + 1
+        else:
+            high = mid - 1
+    print('반환된 low 값: ', low)
+    return low
 
 def main():
 
@@ -82,13 +79,13 @@ main()
 ## 이분탐색 기본
 def binary_search_exists(target_list, x):
     lo = 0
-    hi = len(target_list)
-    while lo < hi:
+    hi = len(target_list) -1  # high를 len(target_list)로 잡고 mid를 (low + high) // 2로 계산하기 때문에 mid == len(target_list)이 나오면 인덱스 초과 오류로 -1한다.
+    while lo <= hi:
         mid = (lo + hi) // 2
         if target_list[mid] == x:
             return True          # 찾았으니 바로 종료
         elif target_list[mid] < x:
             lo = mid + 1         # 오른쪽 절반으로
         else:
-            hi = mid         # 왼쪽 절반으로
+            hi = mid - 1       # 왼쪽 절반으로
     return False
