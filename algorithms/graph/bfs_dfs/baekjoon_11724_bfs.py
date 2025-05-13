@@ -32,22 +32,18 @@ import io
 import sys
 from collections import deque
 
-
 def main():
-    input = sys.stdin.readline
-
-    n, m = map(int, input().split())
+    n, m = map(int, sys.stdin.readline().strip().split())
 
     graph = [[] for _ in range(n + 1)]
 
     for _ in range(m):
-        u, v = map(int, input().split())
+        u, v = map(int, sys.stdin.readline().strip().split())
         graph[u].append(v)
         graph[v].append(u)
 
-    visited = [False] * (n + 1)
 
-    def bfs(start):
+    def bfs(start, visited):
         visited[start] = True
         queue = deque([start])
 
@@ -55,18 +51,20 @@ def main():
             cur_node = queue.popleft()
 
             for next_node in graph[cur_node]:
+
                 if not visited[next_node]:
                     visited[next_node] = True
                     queue.append(next_node)
 
-    count = 0
+    visited = [False] * (n + 1)
 
+    count = 0
     for i in range(1, n + 1):
         if not visited[i]:
-            bfs(i)
-            count += 1  # 새로운 연결 요소 발견
+            bfs(i, visited)
+            count += 1
+    return count
 
-    print(count)
 
 test_input = """6 5
 1 2
@@ -88,7 +86,7 @@ test_input_2 = """6 8
 """
 
 sys.stdin = io.StringIO(test_input)
-main()
+print(main())
 
 sys.stdin = io.StringIO(test_input_2)
-main()
+print(main())
