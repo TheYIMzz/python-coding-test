@@ -70,6 +70,32 @@ import sys
 from collections import deque
 
 
+
+test_input = """2
+10 8 17
+0 0
+1 0
+1 1
+4 2
+4 3
+4 5
+2 4
+3 4
+7 4
+8 4
+9 4
+7 5
+8 5
+9 5
+7 6
+8 6
+9 6
+10 10 1
+5 5
+"""
+sys.stdin = io.StringIO(test_input)  # 백준 제출 시 제거
+
+
 def main(graph, col, row):
 
     visited = [[False] * col for _ in range(row)]
@@ -101,31 +127,7 @@ def main(graph, col, row):
                 worms_sum += 1
     return worms_sum
 
-
-test_input = """2
-10 8 17
-0 0
-1 0
-1 1
-4 2
-4 3
-4 5
-2 4
-3 4
-7 4
-8 4
-9 4
-7 5
-8 5
-9 5
-7 6
-8 6
-9 6
-10 10 1
-5 5
-"""
-sys.stdin = io.StringIO(test_input)  # 백준 제출 시 제거
-
+##############################
 t = int(sys.stdin.readline())
 results = []  # t 별로 저장할 결과
 
