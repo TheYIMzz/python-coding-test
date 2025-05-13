@@ -74,23 +74,23 @@ def main(graph, col, row):
 
     visited = [[False] * col for _ in range(row)]
 
-    def bfs(x, y):
-        visited[x][y] = True
+    def bfs(r, c):
+        visited[r][c] = True
         queue = deque()
-        queue.append((x, y))
+        queue.append((r, c))
 
         delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         while queue:
-            cur_x, cur_y = queue.popleft()
+            cur_r, cur_c = queue.popleft()
 
-            for dx, dy in delta:
-                next_x = cur_x + dx
-                next_y = cur_y + dy
+            for dr, dc in delta:
+                next_r = cur_r + dr
+                next_c = cur_c + dc
 
-                if next_x < row and next_x >= 0 and next_y < col and next_y >= 0:
-                    if graph[next_x][next_y] == 1 and not visited[next_x][next_y]:
-                        visited[next_x][next_y] = True
-                        queue.append((next_x, next_y))
+                if 0 <= next_r < row and 0 <= next_c < col:
+                    if graph[next_r][next_c] == 1 and not visited[next_r][next_c]:
+                        visited[next_r][next_c] = True
+                        queue.append((next_r, next_c))
 
 
     worms_sum = 0
