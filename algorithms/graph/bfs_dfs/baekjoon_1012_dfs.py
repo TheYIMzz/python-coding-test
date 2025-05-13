@@ -4,31 +4,6 @@ import sys
 # 재귀 깊이 제한을 늘려줌
 sys.setrecursionlimit(10**6)
 
-def main(graph, row, col):
-
-    visited = [[False] * col for _ in range(row)]
-
-    def dfs(graph, x, y, visited):
-        visited[x][y] = True
-        delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-
-        for dx, dy in delta:
-            next_x = dx + x
-            next_y = dy + y
-
-            if 0 <= next_x < row and 0 <= next_y < col:
-                if not visited[next_x][next_y] and graph[next_x][next_y] == 1:
-                    dfs(graph, next_x, next_y, visited)
-
-
-    result = 0
-
-    for i in range(row):
-        for j in range(col):
-            if not visited[i][j] and graph[i][j] == 1:
-                dfs(graph, i, j, visited)
-                result += 1
-    return result
 
 test_input = """2
 10 8 17
@@ -53,21 +28,48 @@ test_input = """2
 5 5
 """
 sys.stdin = io.StringIO(test_input)  # 백준 제출 시 제거
-t = int(sys.stdin.readline())
+
+
+
+def main(graph, col, row):
+    visited = [[False] * col for _ in range(row)]
+
+    def dfs(r, c):
+        visited[r][c] = True
+        delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+        for dr, dc in delta:
+            next_r = dr + r
+            next_c = dc + c
+
+            if 0 <= next_r < row and 0 <= next_c < col:
+                if not visited[next_r][next_c] and graph[next_r][next_c]:
+                    dfs(next_r, next_c)
+
+    count = 0
+    for i in range(row):
+        for j in range(col):
+            if not visited[i][j] and graph[i][j] == 1:
+                dfs(i, j)
+                count += 1
+
+    return count
+
+#########################
+
+t = int(sys.stdin.readline().strip().split()[0])
+
 results = []
-
 for _ in range(t):
-
-    col, row, k = map(int, sys.stdin.readline().split())
-    graph = [[0] * col for _ in range(row)]
+    m, n, k = map(int, sys.stdin.readline().strip().split())
+    graph = [[0] * m for _ in range(n)]
 
     for _ in range(k):
-        x, y = map(int, sys.stdin.readline().split())
+        x, y = map(int, sys.stdin.readline().strip().split())
         graph[y][x] = 1
 
-    result = main(graph, row, col)
+    result = main(graph, m, n)
     results.append(result)
 
-# 결과 출력
 for res in results:
     print(res)
