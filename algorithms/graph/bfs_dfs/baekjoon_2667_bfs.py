@@ -74,17 +74,17 @@ def main():
         return house_cnt
 
     danzi_count = 0
-    apt_count_list = []
+    house_cnt_list = []
     for i in range(row):
         for j in range(col):
             if not visited[i][j] and graph[i][j] == 1:
-                apt_count_list.append(bfs(i, j))
+                house_cnt_list.append(bfs(i, j))
                 danzi_count += 1
 
-    apt_count_list.sort()  # 정렬
+    house_cnt_list.sort()  # 정렬
 
     print(danzi_count)
-    for apt_cnt in apt_count_list:
+    for apt_cnt in house_cnt_list:
         print(apt_cnt)
 
 
