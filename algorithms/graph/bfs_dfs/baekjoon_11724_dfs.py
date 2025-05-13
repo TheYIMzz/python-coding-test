@@ -1,35 +1,36 @@
-
 import io
 import sys
 
-def main():
+sys.setrecursionlimit(10**7)
 
-    n, m = map(int, sys.stdin.readline().split())
+def main():
+    n, m = map(int, sys.stdin.readline().strip().split())
 
     graph = [[] for _ in range(n + 1)]
 
     for _ in range(m):
-        a, b = map(int, sys.stdin.readline().split())
-        graph[a].append(b)
-        graph[b].append(a)
+        u, v = map(int, sys.stdin.readline().strip().split())
+        graph[u].append(v)
+        graph[v].append(u)
+
+    def dfs(cur_node, visited):
+
+        visited[cur_node] = True
+        for next_node in graph[cur_node]:
+            if not visited[next_node]:
+                dfs(next_node, visited)
 
     visited = [False] * (n + 1)
-
-    def dfs(graph, v, visited):
-        visited[v] = True
-
-        for next_v in graph[v]:
-            if not visited[next_v]:
-                dfs(graph, next_v, visited)
-
     count = 0
     for i in range(1, n + 1):
         if not visited[i]:
-            dfs(graph, i, visited)
+            dfs(i, visited)
             count += 1
+
     print(visited)
     print(graph)
-    print(count)
+
+    return count
 
 test_input = """6 5
 1 2
@@ -51,7 +52,7 @@ test_input_2 = """6 8
 """
 
 sys.stdin = io.StringIO(test_input)
-main()
+print(main())
 
 sys.stdin = io.StringIO(test_input_2)
-main()
+print(main())
