@@ -70,7 +70,7 @@ import sys
 from collections import deque
 
 
-def main(graph, row, col):
+def main(graph, col, row):
 
     visited = [[False] * col for _ in range(row)]
 
@@ -137,7 +137,7 @@ for _ in range(t):
         x, y = map(int, sys.stdin.readline().split())
         graph[y][x] = 1  # 밭의 배추 위치 설정 (파이썬 2차원 배열은 세로가 먼저, 가로가 나중이므로 [y][x])
 
-    result = main(graph, row, col)
+    result = main(graph, col, row)
     results.append(result)
 
 # 결과 출력
