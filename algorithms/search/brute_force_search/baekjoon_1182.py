@@ -28,7 +28,6 @@ def main():
 
         if sum(curr) == s and len(curr) > 0:
             count += 1
-            return count
 
         for i in range(start, n):
             print(f'현재 start: {start}')
