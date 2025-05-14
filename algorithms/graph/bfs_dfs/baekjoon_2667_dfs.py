@@ -39,43 +39,49 @@
 import io
 import sys
 
+
 def main():
-    n = int(input())
-    graph = [list(map(int, input().strip())) for _ in range(n)]
+
+    n = int(sys.stdin.readline().strip().split()[0])
+
+    graph = [list(map(int, sys.stdin.readline().strip())) for _ in range(n)]
 
     row = len(graph)
     col = len(graph[0])
 
+
+    def dfs(r, c, visited):
+        visited[r][c] = True
+
+        delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        houns_cnt = 1
+        for dr, dc in delta:
+            next_r = dr + r
+            next_c = dc + c
+
+            if 0 <= next_r < row and 0 <= next_c < col:
+                if not visited[next_r][next_c] and graph[next_r][next_c]:
+                    houns_cnt += dfs(next_r, next_c, visited)  # 가장 깊은 재귀함수에서 반환된 1부터 올라오면서 누적
+
+        return houns_cnt
+
     visited = [[False] * col for _ in range(row)]
 
-    def dfs(x, y):
-        delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        visited[x][y] = True
-        house_sum=1
-
-        for dx, dy in delta:
-            next_x = x + dx
-            next_y = y + dy
-
-            if 0 <= next_x < row and 0 <= next_y < col:
-                if not visited[next_x][next_y] and graph[next_x][next_y] == 1:
-                    house_sum += dfs(next_x, next_y)
-
-        return house_sum
-
-    danji_sum = 0
-    dfs_result = []
+    danzi_cnt = 0
+    apt_count_list = []
     for i in range(row):
         for j in range(col):
             if not visited[i][j] and graph[i][j] == 1:
-                dfs_result.append(dfs(i, j))
-                danji_sum += 1
+                apt_count_list.append(dfs(i, j, visited))
+                danzi_cnt += 1
 
-    dfs_result.sort()
-    print(danji_sum)
 
-    for dfs_res in dfs_result:
-        print(dfs_res)
+    apt_count_list.sort()
+
+    print(danzi_cnt)
+    for apt_cnt in apt_count_list:
+        print(apt_cnt)
+
 
 
 test_input_1="""7 

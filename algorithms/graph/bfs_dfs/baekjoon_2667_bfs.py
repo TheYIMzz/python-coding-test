@@ -41,57 +41,51 @@ from collections import deque
 # n = 지도의 크기 (문제에서 지도는 정사각형 이므로 n x n)
 # 연결된 집의 수 => 단지
 # 단지수, 집의수 반환
-
 def main():
-
-    n = int(input())
-    graph = [list(map(int, input().strip())) for _ in range(n)]
-
-    # print('n: ', n)
-    # for i in graph:
-    #     print('graph: ', i)
+    n = int(sys.stdin.readline().strip().split()[0])
+    graph = [list(map(int, sys.stdin.readline().strip())) for _ in range(n)]
 
     row = len(graph)
     col = len(graph[0])
 
     visited = [[False] * col for _ in range(row)]
 
-    def bfs(x, y, visited):
-        print('==============')
-        house_sum = 1
-        delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-
-        visited[x][y] = True
+    def bfs(r, c):
+        visited[r][c] = True
         queue = deque()
-        queue.append((x, y))
+        queue.append((r,c))
+
+        delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        house_cnt = 1
 
         while queue:
-            cur_x, cur_y = queue.popleft()
-            print('방문 좌표: ', cur_x, cur_y)
-            for dx, dy in delta:
-                next_x = cur_x + dx
-                next_y = cur_y + dy
+            cur_r, cur_c = queue.popleft()
 
-                if next_x < row and next_x >= 0 and next_y < col and next_y >= 0:
-                    if graph[next_x][next_y] == 1 and not visited[next_x][next_y]:
-                        visited[next_x][next_y] = True
-                        queue.append((next_x, next_y))
-                        house_sum += 1
-        return house_sum
+            for dr, dc in delta:
+                next_r = cur_r + dr
+                next_c = cur_c + dc
 
-    danji_sum = 0
-    house_sums = []
+                if 0 <= next_r < row and 0 <= next_c < col:
+                    if not visited[next_r][next_c] and graph[next_r][next_c] == 1:
+                        visited[next_r][next_c] = True
+                        queue.append((next_r, next_c))
+                        house_cnt += 1
+
+        return house_cnt
+
+    danzi_count = 0
+    house_cnt_list = []
     for i in range(row):
         for j in range(col):
-            if graph[i][j] == 1 and not visited[i][j]:
-                house_sums.append(bfs(i, j, visited))
-                danji_sum += 1
+            if not visited[i][j] and graph[i][j] == 1:
+                house_cnt_list.append(bfs(i, j))
+                danzi_count += 1
 
-    house_sums.sort() # 오름차순 정렬
+    house_cnt_list.sort()  # 정렬
 
-    print(danji_sum)
-    for house_sum in house_sums:
-        print(house_sum)
+    print(danzi_count)
+    for apt_cnt in house_cnt_list:
+        print(apt_cnt)
 
 
 test_input = """7
