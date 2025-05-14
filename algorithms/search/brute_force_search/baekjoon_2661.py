@@ -32,47 +32,46 @@
     출력 예제
     1213121
 """
+import io, sys
 
-import sys
-import io
-sys.setrecursionlimit(10**7)
-test_input = """7
-"""
 
-sys.stdin = io.StringIO(test_input)
-n = int(sys.stdin.readline().strip())
-nums = [1, 2, 3]
+def is_good(curr):
+    l = len(curr)
+    print('반복전 curr: ', curr)
 
-# 뒤쪽을 검사해서 XX 패턴이 있는지 체크하는 함수
-def is_good(seq):
-    l = len(seq)
-
-    print('반복전 seq: ', seq)
-    # k 는 반복 블록의 길이
-    for k in range(1, l//2 + 1):  # 좋은 수열을 판단하기 위해 블록은 2개가 필요하므로 2로 나누고 소수점은 필요없으니 버리고 range가 -1까지 가므로 +1 더해준다
-        print(seq)
-        print('k =', k)
-        print(f'수열비교:  {seq[-k:]} == {seq[-2 * k:-k]}' )
-        if seq[-k:] == seq[-2 * k:-k]: # 뒤에서 k개 요소(seq[-k:])와 그 앞 k개 요소(seq[-2*k:-k])를 잘라와 비교, 같다면 나쁜수열
+    for i in range(1, l // 2 + 1): # 좋은 수열을 판단하기 위해 블록은 2개가 필요하므로 2로 나누고 소수점은 필요없으니 버리고 range가 -1까지 가므로 +1 더해준다
+        print(curr)
+        print('k =', i)
+        print(f'수열비교:  {curr[-i:]} == {curr[-2 * i:-i]}')
+        if curr[-i:] == curr[-2*i:-i]:  # 뒤에서 k개 요소(seq[-k:])와 그 앞 k개 요소(seq[-2*k:-k])를 잘라와 비교, 같다면 나쁜수열
             return False
     return True
 
-def back_track(curr):
-    # 목표 길이 도달하면 결과 출력 후 종료
-    if len(curr) == n:
-        print(''.join(map(str, curr)))
-        sys.exit(0)
 
-    for num in nums:
-        curr.append(num)  # 1. 선택
-        print('append 후 curr: ', curr)
-        if is_good(curr):  # 2. 탐색
-            back_track(curr)
-        print(curr)
-        curr.pop()  # 3. 되돌리기
-        print('pop 후 curr: ', curr)
+def main():
 
-# 탐색 시작
-back_track([])
+    n = int(sys.stdin.readline().strip().split()[0])
+    nums = [1, 2, 3]
+
+    def back_track(curr):
+        # 목표 길이 도달하면 결과 출력 후 종료
+        if len(curr) == n:
+            print("".join(map(str, curr)))
+            # print(curr)
+            sys.exit(0)
+
+        for num in nums:
+            curr.append(num)   # 1. 선택
+            print('append 후 curr: ', curr)
+            if is_good(curr):
+                back_track(curr)   # 2. 탐색
+            curr.pop()   # 3. 되돌리기
+            print('pop 후 curr: ', curr)
+    back_track([])
 
 
+
+test_input = """7"""
+sys.stdin = io.StringIO(test_input)
+
+main()
