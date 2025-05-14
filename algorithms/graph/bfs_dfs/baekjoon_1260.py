@@ -50,62 +50,58 @@ import io
 from collections import deque
 
 
-def dfs(graph, v, visited, order):
-
-    visited[v] = True
-    order.append(v)
-    
-    for next_node in graph[v]:
-        if not visited[next_node]:
-            dfs(graph, next_node, visited, order)
-
-
-def bfs(graph, start):
-
-    visited = [False] * len(graph)
-    visited[start] = True
-    queue = deque([start])
-    order = []
-    
-    while queue:
-        cur_node = queue.popleft()
-        order.append(cur_node)
-        
-        for next_node in graph[cur_node]:
-            if not visited[next_node]:
-                visited[next_node] = True
-                queue.append(next_node)
-    return order
-
 
 def main():
+    n, m, v = map(int, sys.stdin.readline().strip().split())
 
-    n, m, v = map(int, input().split())
     graph = [[] for _ in range(n + 1)]
 
     for _ in range(m):
-        a, b = map(int, input().split())
+        a, b = map(int, sys.stdin.readline().strip().split())
         graph[a].append(b)
         graph[b].append(a)
 
-    # 번호가 작은 정점(노드)을 먼저 방문하도록 인접 리스트를 오름차순 정렬
-    print('정렬 전 그래프: ', graph)
-    for sort_graph in graph:
-        sort_graph.sort()  # sort_graph는 graph의 요소를 참조하기 때문에 graph의 요소가 정렬된다
-    print('정렬 후 그래프: ', graph)
+    for sorted_graph in graph:
+        sorted_graph.sort()
 
-    # DFS 탐색
-    visited_dfs = [False] * (n + 1)
-    order_dfs = []
-    dfs(graph, v, visited_dfs, order_dfs)
 
-    # BFS 탐색
-    order_bfs = bfs(graph, v)
 
-    # 결과 출력 (각 정점을 공백으로 구분하여 한 줄에 출력)
-    print(" ".join(map(str, order_dfs)))
-    print(" ".join(map(str, order_bfs)))
+    def dfs(start, visited, result_node):
+        visited.add(start)
+        result_node.append(start)
 
+        for next_v in graph[start]:
+            if next_v not in visited:
+                dfs(next_v, visited, result_node)
+        return result_node
+
+
+    def bfs(start, visited):
+        visited[start] = True
+        queue = deque()
+        queue.append(start)
+
+        resunt_node = []
+        while queue:
+            cur_node = queue.popleft()
+
+            resunt_node.append(cur_node)
+            for next_node in graph[cur_node]:
+                if not visited[next_node]:
+                    visited[next_node] = True
+                    queue.append(next_node)
+
+        return resunt_node
+
+
+    result_node = []
+    dfs_result = dfs(v, set(), result_node)
+
+    bfs_visited = [False] * (n + 1)
+    bfs_result = bfs(v, bfs_visited)
+
+    print(" ".join(map(str, dfs_result)))
+    print(" ".join(map(str,bfs_result)))
 
 test_input_1 = """4 5 1
 1 2
@@ -121,6 +117,10 @@ test_input_2 = """5 5 3
 1 2
 3 4
 3 1
+"""
+
+test_input_3 = """1000 1 1000
+999 1000
 """
 
 sys.stdin = io.StringIO(test_input_1)  # 백준 제출 시 제거
