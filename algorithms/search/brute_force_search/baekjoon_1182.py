@@ -16,31 +16,34 @@
     출력 예제
     1
 """
-import io
-import sys
+import sys, io
+
+def main():
+    n, s = map(int, sys.stdin.readline().strip().split())
+    nums = list(map(int, sys.stdin.readline().strip().split()))
+
+    count = 0
+    def back_track(start, curr):
+        nonlocal count
+
+        if sum(curr) == s and len(curr) > 0:
+            count += 1
+            return count
+
+        for i in range(start, n):
+            print(f'현재 start: {start}')
+            curr.append(nums[i])
+            print(f'nums[{i}] append: ', curr, f'넘겨받은 start {start}의 남은 for문 {i} 번째 반복 처리')
+            back_track(i + 1, curr)
+            curr.pop()
+            print(f'nums[{i}] pop: ', curr)
+
+    back_track(0, curr=[])
+    return count
 
 test_input = """5 0
 -7 -3 -2 5 8
 """
-
 sys.stdin = io.StringIO(test_input)
 
-n, s = map(int, sys.stdin.readline().split())
-nums = list(map(int, sys.stdin.readline().split()))
-count = 0
-
-def back_track(start, curr):
-    global count
-    if sum(curr) == s and len(curr) > 0:  # len(curr) > 0 공집합 제외 조건
-        count += 1
-
-    for i in range(start, n):
-        print(f'현재 start: {start}')
-        curr.append(nums[i])
-        print(f'nums[{i}] append: ', curr, f'넘겨받은 start {start}의 남은 for문 {i} 번째 반복 처리')
-        back_track(i + 1, curr)
-        curr.pop()
-        print(f'nums[{i}] pop: ', curr)
-
-back_track(start=0, curr=[])
-print(count)
+print(main())
