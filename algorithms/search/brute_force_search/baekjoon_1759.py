@@ -39,44 +39,41 @@
     istw
 """
 
-import sys
-import io
+import sys, io
+
+def main():
+    l, c = map(int, sys.stdin.readline().strip().split())
+    str_list = sys.stdin.readline().strip().split()
+    str_list.sort()  # 입력 문자열 정렬
+
+    vowel = ['a', 'e', 'i', 'o', 'u']
+
+    vowel = ['a', 'e', 'i', 'o', 'u'] # 모음
+
+    def back_track(start, curr):
+        result = []
+        if len(curr) == l:
+            vowel_cnt = sum(1 for char in curr if char in vowel)  # 모음 개수
+            consonat_cnt = len(curr) - vowel_cnt  # 자음 개수
+
+            # 조건에 맞는 경우만 결과에 추가: 모음 1개 이상, 자음 2개 이상
+            if vowel_cnt >= 1 and consonat_cnt >= 2:
+                result.append(curr[:])
+
+        for i in range(start, c):
+            curr.append(str_list[i])
+            back_track(i + 1, curr)
+            curr.pop()
+
+        for res in result:
+            print("".join(res))
+
+        back_track(0, [])
 
 
 test_input = """4 6
 a t c i s w
 """
 sys.stdin = io.StringIO(test_input)
-
-l, c = map(int, sys.stdin.readline().split())
-str_list = sys.stdin.readline().split()
-str_list.sort()  # 입력 문자열 정렬
-
-vowels = {'a', 'e', 'i', 'o', 'u'}  # 모음 집합
-
-
-def main():
-    result = []
-
-    def backtrack(start, curr):
-        if len(curr) == l:
-            # 모음의 개수와 자음의 개수를 계산
-            count_vowels = sum(1 for ch in curr if ch in vowels)  # 모음
-            count_consonants = l - count_vowels  # 자음
-
-            # 조건에 맞는 경우만 결과에 추가: 모음 1개 이상, 자음 2개 이상
-            if count_vowels >= 1 and count_consonants >= 2:
-                result.append(curr[:])
-            return
-
-        for i in range(start, c):
-            curr.append(str_list[i])
-            backtrack(i + 1, curr)
-            curr.pop()
-
-    backtrack(0, [])
-
-    for z in result:
-        print(''.join(z))
 
 main()
