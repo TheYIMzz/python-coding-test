@@ -44,31 +44,22 @@
     예제 출력 5
     0.008845493197441101
 """
-import sys
-import io
-sys.setrecursionlimit(10**7)
-
-
-test_input = """2 25 25 25 25
-"""
-sys.stdin = io.StringIO(test_input)
-
-n, east, west, south, north = map(int, sys.stdin.readline().strip().split())
-probs = [east/100, west/100, south/100, north/100]
-
+import io, sys
 
 def main():
 
-    result = 0.0
+    n, east, west, south, north = map(int, sys.stdin.readline().strip().split())
+    probs = [east/100, west/100, south/100, north/100]
 
+    result = 0.0
     size = 2 * n + 1
+
     visited = [[False] * size for _ in range(size)]
 
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
+    dr = [-1, 1, 0, 0]
+    dc = [0, 0, -1, 1]
 
-    def back_track(x, y, depth, prob):
-
+    def back_track(r, c, depth, prob):
         nonlocal result
 
         if depth == n:
@@ -76,18 +67,21 @@ def main():
             return
 
         for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
+            next_r = dr[i] + r
+            next_c = dc[i] + c
 
-            if not visited[nx][ny]:
-                visited[nx][ny] = True
-                back_track(nx, ny, depth + 1, prob * probs[i])
-                visited[nx][ny] = False
-
+            if not visited[next_r][next_c]:
+                visited[next_r][next_c] = True
+                back_track(next_r, next_c, depth + 1, prob * probs[i])
+                visited[next_r][next_c] = False
 
     visited[n][n] = True
     back_track(n, n, 0, 1.0)
+
     print(result)
+
+test_input = '''2 25 25 25 25'''
+sys.stdin = io.StringIO(test_input)
 
 
 main()
