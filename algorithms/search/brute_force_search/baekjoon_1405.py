@@ -46,42 +46,51 @@
 """
 import io, sys
 
+
 def main():
 
     n, east, west, south, north = map(int, sys.stdin.readline().strip().split())
-    probs = [east/100, west/100, south/100, north/100]
 
+    probs = [east/100, west/100, south/100, north/100]
     result = 0.0
     size = 2 * n + 1
-
     visited = [[False] * size for _ in range(size)]
 
-    dr = [-1, 1, 0, 0]
-    dc = [0, 0, -1, 1]
+    delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
     def back_track(r, c, depth, prob):
         nonlocal result
 
-        if depth == n:
+        if n == depth:
             result += prob
+            print(f'깊이 {n} 도달 result 합산', result)# 제출 시 제거
+            print(f'=============================================')# 제출 시 제거
             return
+        print(f'현재 r 값: {r}')# 제출 시 제거
+        print(f'현재 c 값: {c}')# 제출 시 제거
+        for i, (dc, dr) in enumerate(delta):
+            nr = r + dr
+            nc = c + dc
+            print()# 제출 시 제거
+            print('for문 진입')# 제출 시 제거
+            print(f'현재 i 값: {i}') # 제출 시 제거
 
-        for i in range(4):
-            next_r = dr[i] + r
-            next_c = dc[i] + c
+            if visited[nr][nc]: # 제출 시 제거
+                print('이미 방문한 노드: ', nr,nc) # 제출 시 제거
 
-            if not visited[next_r][next_c]:
-                visited[next_r][next_c] = True
-                back_track(next_r, next_c, depth + 1, prob * probs[i])
-                visited[next_r][next_c] = False
+            if not visited[nr][nc]:
+                visited[nr][nc] = True
+                print('재귀호출에 넘겨줄 현재 확률값:', probs[i] * prob) # 제출 시 제거
+                back_track(nr, nc, depth + 1, probs[i] * prob)
+                visited[nr][nc] = False
 
     visited[n][n] = True
-    back_track(n, n, 0, 1.0)
+    back_track(n, n, 0, 1.0)  # 출발 지점에서 시작하므로 처음엔 존재할 확률 100%
 
     print(result)
 
-test_input = '''2 25 25 25 25'''
-sys.stdin = io.StringIO(test_input)
-
+sys.stdin = io.StringIO( # 제출 시 제거
+"""2 25 25 25 25
+""")
 
 main()
