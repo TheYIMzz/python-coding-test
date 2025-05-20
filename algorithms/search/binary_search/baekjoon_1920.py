@@ -60,6 +60,7 @@ def binary_search(target_list, x):
 
         mid = (low + high) // 2
 
+        # target_list[mid] == x가 성립하더라도 더 왼쪽 인덱스에 존재하는지 확인하기 위해 ==는 비교안함
         if target_list[mid] < x:  #  target_list[mid] 범위 초과 주의
             low = mid + 1
             print('mid: ', mid)
@@ -69,6 +70,7 @@ def binary_search(target_list, x):
             print('mid: ', mid)
             print('high(mid - 1): ', high)
     print('반환된 low 값: ', low)
+    print()
     return low
 
 def main():
