@@ -36,7 +36,10 @@ test_input = """5
 1 3 7 9 5
 """
 sys.stdin = io.StringIO(test_input)
-
+"""
+1 2 3 4 5
+1 3 7 9 5
+"""
 n = int(sys.stdin.readline().strip())
 n_nums = list(map(int, sys.stdin.readline().strip().split()))
 m = int(sys.stdin.readline().strip())
@@ -59,8 +62,12 @@ def binary_search(target_list, x):
 
         if target_list[mid] < x:  #  target_list[mid] 범위 초과 주의
             low = mid + 1
+            print('mid: ', mid)
+            print('low(mid + 1): ', low)
         else:
             high = mid - 1
+            print('mid: ', mid)
+            print('high(mid - 1): ', high)
     print('반환된 low 값: ', low)
     return low
 
