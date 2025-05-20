@@ -57,7 +57,7 @@ def binary_search(target_list, x):
 
         mid = (low + high) // 2
 
-        if target_list[mid] < x:
+        if target_list[mid] < x:  #  target_list[mid] 범위 초과 주의
             low = mid + 1
         else:
             high = mid - 1
