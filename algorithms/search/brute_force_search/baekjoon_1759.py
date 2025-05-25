@@ -46,8 +46,6 @@ def main():
     str_list = sys.stdin.readline().strip().split()
     str_list.sort()  # 입력 문자열 정렬
 
-    vowel = ['a', 'e', 'i', 'o', 'u']
-
     vowel = ['a', 'e', 'i', 'o', 'u'] # 모음
 
     def back_track(start, curr):
@@ -68,12 +66,11 @@ def main():
         for res in result:
             print("".join(res))
 
-        back_track(0, [])
+    back_track(0, [])
 
 
-test_input = """4 6
+sys.stdin = io.StringIO("""4 6
 a t c i s w
-"""
-sys.stdin = io.StringIO(test_input)
+""")
 
 main()
