@@ -40,7 +40,7 @@ def dijkstra(graph, start, final):
         print('===================== ')
 
         if cur_v not in costs:  # 추출한 노드(cur_v)가 costs에 기록되어 있는지 확인 (이미 기록된 노드의 비용보다 더 큰 비용으로 노드에 도착하는 경우 그 노드는 무시한다. (ex 나중에 비용 4로 노드 3이 나오면, 이미 더 작은 3의 비용으로 기록되어 있기 때문에 무시)
-            costs[cur_v] = cur_cost  # 아직 방문하지 않은 노드 cur_v에 대해, 시작 노드로부터 도달한 누적 비용 cur_cost를 기록
+            costs[cur_v] = cur_cost  # 현재 cur_v에 대해, 시작 노드로부터 도달한 누적 비용 cur_cost를 기록
             for cost, next_v in graph[cur_v]:  # 현재 노드와 연결된 노드 우선순위 큐에 추가
                 next_cost = cur_cost + cost  # 비용 계산 후
                 heapq.heappush(pq, (next_cost, next_v))  # 우선순위 큐에 추가
