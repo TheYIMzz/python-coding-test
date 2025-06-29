@@ -55,7 +55,7 @@ def binary_search():
     high = max(tree_list)
     result = 0
 
-    while low < high:
+    while low <= high:
         mid = (low + high) // 2
 
         wood = 0 # mid 높이로 자를 때 얻을 수 있는 나무 길이 총합
@@ -73,7 +73,7 @@ def binary_search():
             low = mid + 1
         else:
             print('나무가 필요치 미만인 경우 mid 값: ', mid)
-            high = mid  # 나무가 부족하면 톱 높이 낮춘다
+            high = mid -1  # 나무가 부족하면 톱 높이 낮춘다
 
     print(result)
 
