@@ -50,7 +50,7 @@
 """
 import io, sys
 
-
+# 중복허용 집합
 def main():
 
     N, M = map(int, sys.stdin.readline().strip().split())

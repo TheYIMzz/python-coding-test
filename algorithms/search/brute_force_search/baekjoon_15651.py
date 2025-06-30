@@ -42,7 +42,7 @@
 """
 
 import sys, io
-
+# 중복허용 순열
 def main():
 
     N, M = map(int, sys.stdin.readline().strip().split())
