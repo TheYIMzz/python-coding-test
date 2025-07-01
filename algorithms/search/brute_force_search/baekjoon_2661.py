@@ -39,11 +39,11 @@ def is_good(curr):
     l = len(curr)
     print('반복전 curr: ', curr)
 
-    for i in range(1, l // 2 + 1): # 좋은 수열을 판단하기 위해 블록은 2개가 필요하므로 2로 나누고 소수점은 필요없으니 버리고 range가 -1까지 가므로 +1 더해준다
+    for i in range(1, l // 2 + 1): # 좋은 수열을 판단하려면 같은 길이의 블록 2개가 필요(2로 나눔). 길이 0부터 시작하면 [-0:]과 같은 잘못된 인덱싱이 발생하므로 range(1, ...)로 시작하고, range는 끝 값을 포함하지 않으므로 +1을 더해준다.
         print(curr)
         print('k =', i)
         print(f'수열비교:  {curr[-i:]} == {curr[-2 * i:-i]}')
-        if curr[-i:] == curr[-2*i:-i]:  # 뒤에서 k개 요소(seq[-k:])와 그 앞 k개 요소(seq[-2*k:-k])를 잘라와 비교, 같다면 나쁜수열
+        if curr[-i:] == curr[-2*i:-i]:  # 뒤에서 i개 요소(seq[-i:])와 그 앞 i개 요소(seq[-2*i:-i])를 잘라와 비교, 같다면 나쁜수열
             return False
     return True
 
