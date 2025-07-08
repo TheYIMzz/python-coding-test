@@ -25,8 +25,8 @@ def solution(numbers):
         if x < 2:   # 2보다 작은 수 필터링(0, 1, 음수는 소수에서 제외)
             return False
         limit = int(math.isqrt(x))  # math.isqrt -> x의 제곱근을 내림 정수로 돌려주는 함수
-        for k in range(2, limit + 1):
-            if x % k == 0:
+        for k in range(2, limit + 1): # 2보다 작은 건 소수가 아니므로 2부터 시작, 약수 쌍의 작은 쪽의 가장 큰 수는 반드시 제곱근 이하이므로 제곱근까지 반복
+            if x % k == 0: # x를 k로 나누었을 때 나머지가 0이면, k가 x의 약수이므로 소수가 아님
                 return False
         return True
 
