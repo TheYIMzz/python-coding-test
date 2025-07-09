@@ -21,7 +21,7 @@ def solution(numbers):
     print(nums)
 
     # 소수인지 체크
-    def is_prime(x):
+    def is_good(x):
         if x < 2:   # 2보다 작은 수 필터링(0, 1, 음수는 소수에서 제외)
             return False
         limit = int(math.isqrt(x))  # math.isqrt -> x의 제곱근을 내림 정수로 돌려주는 함수
@@ -32,11 +32,11 @@ def solution(numbers):
 
     count = 0
     for num in nums:
-        if is_prime(num):
+        if is_good(num):
             count += 1
 
     return count
 
 
-numbers = "17"
+numbers = "17" # "011"
 print(solution(numbers))
