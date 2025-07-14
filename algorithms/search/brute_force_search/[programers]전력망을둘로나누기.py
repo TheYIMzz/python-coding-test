@@ -17,9 +17,9 @@ def main(n, wires):
     def dfs(u):
         visited[u] = True  # 1) 방문 처리
         size = 1  # 2) 자기 자신 카운트
-        for v in graph[u]:  # 3) 이웃 순회
-            if not visited[v]:  # 4) 아직 방문하지 않은 자식만
-                size += dfs(v)  # 서브트리 크기 누적
+        for next_v in graph[u]:  # 3) 이웃 순회
+            if not visited[next_v]:  # 4) 아직 방문하지 않은 자식만
+                size += dfs(next_v)  # 서브트리 크기 누적
         subtree_size[u] = size  # 5) 결과 저장
         return size
 
