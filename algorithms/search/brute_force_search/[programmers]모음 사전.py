@@ -1,6 +1,5 @@
 def main():
-
-
+    vowels = ['A', 'E', 'I', 'O', 'U']
     result = []
     def back_track(curr):
 
@@ -20,5 +19,4 @@ def main():
     return result.index(word) + 1
 
 word = "AAAAE"
-vowels = ['A', 'E', 'I', 'O', 'U']
 print(main())
