@@ -5,7 +5,7 @@ def main():
 
         if len(curr) > 5:
             return
-
+        print(curr)
         if curr:
             result.append(''.join(curr))
 
@@ -15,7 +15,7 @@ def main():
             curr.pop()
 
     back_track([])
-    print(result)
+
     return result.index(word) + 1
 
 word = "AAAAE"
