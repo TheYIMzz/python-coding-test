@@ -9,6 +9,10 @@ def solution(numbers):
     print(visited)
     # 주어진 문자열로 숫자 집합 생성
     def backtrack(curr):
+
+        if len(curr) == len(numbers):  # 최대 깊이에서 한번 더 불필요한 재귀 방지 (이미 visited가 모두 True일때 재귀해서 if 체크 방지)
+            return
+
         for i in range(n):
             if not visited[i]:
                 visited[i] = True
