@@ -25,14 +25,15 @@ from collections import Counter
 def main_2():
 
     # 리스트의 각 요소를 키로, 등장 횟수를 값으로 저장한 뒤, 두 Counter를 빼면 동일한 키의 값이 서로 차감
-    part_counter = Counter(participant)
-    comp_counter = Counter(completion)
-    print(part_counter)
-    print(comp_counter)
-    diff = part_counter - comp_counter  # 남은 사람
-    print(diff.keys())
-    print(list(diff.keys()))
-    print(list(diff.keys())[0])
-    return list(diff.keys())[0]
+    # part_counter = Counter(participant)
+    # comp_counter = Counter(completion)
+    # print(part_counter)
+    # print(comp_counter)
+    # diff = part_counter - comp_counter  # 남은 사람
+    # print(diff.keys())
+    # print(list(diff.keys()))
+    # print(list(diff.keys())[0])
+    # return list(diff.keys())[0]
+    return list(Counter(participant) - Counter(completion)).pop()
 
 print(main_2())
