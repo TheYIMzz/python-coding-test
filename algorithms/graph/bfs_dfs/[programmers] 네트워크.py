@@ -4,30 +4,27 @@ from collections import deque
 
 ##############
 ### bfs
-def main():
+def main_bfs():
 
     for idx, c in enumerate(computers):
         print(idx, c)
 
-
     visited = [False] * n
+    network_cnt = 0
 
     def bfs(start):
-        print('start: ', start)
-        queue = deque()
-        queue.append(start)
+
+        queue = deque([start])
         visited[start] = True
 
         while queue:
             cur_v = queue.popleft()
 
-            for j in range(n):
-                if not visited[j] and computers[cur_v][j] == 1:
-                    visited[j] = True
-                    queue.append(j)
+            for connect_v in range(n):
+                if not visited[connect_v] and computers[cur_v][connect_v] == 1:
+                    visited[connect_v] = True
+                    queue.append(connect_v)
 
-
-    network_cnt = 0
     for i in range(n):
         if not visited[i]:
             bfs(i)
@@ -38,23 +35,21 @@ def main():
 
 ###################
 ### dfs
-
-
-def main():
+def main_dfs():
 
     for idx, c in enumerate(computers):
         print(idx,c)
 
     visited = [False] * n
+    network_cnt = 0
 
     def dfs(cur_v):
         visited[cur_v] = True
 
-        for j in range(n):
-            if not visited[j] and computers[cur_v][j] == 1:
-                dfs(j)
+        for connect_v in range(n):
+            if not visited[connect_v] and computers[cur_v][connect_v] == 1:
+                dfs(connect_v)
 
-    network_cnt = 0
     for i in range(n):
         if not visited[i]:
             dfs(i)
@@ -62,6 +57,8 @@ def main():
 
     return network_cnt
 
+
 n = 3   # 컴퓨터 개수
 computers = [[1, 1, 0], [1, 1, 1], [0, 1, 1]] # 연결정보
-print(main())
+print(main_bfs())
+print(main_dfs())
