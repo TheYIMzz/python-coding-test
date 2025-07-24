@@ -6,23 +6,22 @@ def main():
     win_graph = [[] for _ in range(n + 1)]
     loss_graph = [[] for _ in range(n + 1)]
 
-    win_visited = [False] * (n + 1)
-    loss_visited = [False] * (n + 1)
-
     for u, v in results:
         win_graph[u].append(v)
         loss_graph[v].append(u)
 
-    for i in win_graph:
-        print(i)
-    print()
-    for i in loss_graph:
-        print(i)
+    # for i in win_graph:
+    #     print(i)
+    # print()
+    # for i in loss_graph:
+    #     print(i)
 
-    def bfs(start, visited, graph):
-        visited[start] = True
+    def bfs(start, graph):
+
+        visited = [False] * (n + 1)
         queue = deque()
         queue.append(start)
+
         count = 0
         while queue:
             cur_v = queue.popleft()
@@ -32,13 +31,15 @@ def main():
                     visited[next_v] = True
                     queue.append(next_v)
                     count += 1
+
         return count
-
     answer = 0
-
-    for i in range(1, n + 1):
-        win_result = bfs(i, win_visited, win_graph)
-        loss_result = bfs(i, loss_visited, loss_graph)
+    for node in range(1, n + 1):
+        win_result = bfs(node, win_graph)
+        print(win_result)
+        loss_result = bfs(node, loss_graph)
+        print(loss_result)
+        print(f'===== start: {node} =====')
 
         if win_result + loss_result == n - 1:
             answer += 1
