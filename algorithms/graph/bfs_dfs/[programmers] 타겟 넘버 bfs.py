@@ -1,24 +1,22 @@
 from collections import deque
 
-
-def main():
-
-
+def solution(numbers, target):
     queue = deque()
-    queue.append(0)
+    queue.append((0, 0))  # (index, 현재까지 합)
 
-    for num in numbers:
-        print('====================현재 num: ', num)
-        for _ in range(len(queue)):
-            print('현재 큐 길이: ', len(queue))
+    count = 0
 
-            curr = queue.popleft()
-            print(f'curr값: {curr}')
-            queue.append(curr + num)
-            queue.append(curr - num)
+    while queue:
+        idx, total = queue.popleft()
+        print(f'idx, total: {idx}, {total}')
+        if idx == len(numbers):
+            if total == target:
+                count += 1
+        else:
+            queue.append((idx + 1, total + numbers[idx]))
+            queue.append((idx + 1, total - numbers[idx]))
 
-    return queue.count(target)
-
+    return count
 
 # numbers = [1, 1, 1, 1, 1]
 # target = 3
@@ -26,4 +24,4 @@ def main():
 numbers = [4, 1, 2, 1]
 target = 4
 
-print(main())
+print(solution(numbers, target))
