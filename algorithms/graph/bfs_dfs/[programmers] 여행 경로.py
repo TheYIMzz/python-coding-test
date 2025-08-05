@@ -1,32 +1,34 @@
 def main():
-
     tickets.sort()
-    for idx, x in enumerate(tickets):
-        print(idx, x)
+
+    for i, idx in enumerate(tickets):
+        print(i, idx)
 
     visited = [False] * len(tickets)
     answer = []
 
-    def back_track(path, depth):
+    def back_track(curr, depth):
+
         if depth == len(tickets):
-            answer.append(path[:])
+            answer.append(curr[:])
             return
 
         for i in range(len(tickets)):
-            if not visited[i] and tickets[i][0] == path[-1]:  # 티켓의 출발지와 경로의 마지막 위치
+            if not visited[i] and tickets[i][0] == curr[-1]:
                 visited[i] = True
-                if back_track(path + [tickets[i][1]], depth + 1):
-                    return True
+                curr.append(tickets[i][1])
+                back_track(curr, depth + 1)
                 visited[i] = False
+                curr.pop()
 
-    start = "ICN"
-    back_track([start], 0)
+    back_track(['ICN'], 0)
     return answer[0]
 
-# tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
-tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
-print(main())
+    # tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
 
+
+tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL", "SFO"]]
+print(main())
 
 """
 ICN -> JFK -> HND -> IAD
