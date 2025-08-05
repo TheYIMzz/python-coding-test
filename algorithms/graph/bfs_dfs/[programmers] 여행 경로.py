@@ -26,9 +26,7 @@ def main():
     back_track(['ICN'], 0)
     return answer[0]
 
-    # tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
-
-
+# tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
 tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL", "SFO"]]
 print(main())
 
