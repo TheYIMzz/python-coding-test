@@ -11,13 +11,15 @@ def main():
 
         if depth == len(tickets):
             answer.append(curr[:])
-            return
+            return True
 
         for i in range(len(tickets)):
             if not visited[i] and tickets[i][0] == curr[-1]:
                 visited[i] = True
                 curr.append(tickets[i][1])
-                back_track(curr, depth + 1)
+                # print(curr)
+                if back_track(curr, depth + 1):
+                    return True  # 정답 경로를 찾은 경우 상위 호출도 종료하기 위해 True 반환
                 visited[i] = False
                 curr.pop()
 
