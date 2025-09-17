@@ -6,7 +6,7 @@ results = [[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]
 ###############
 ## bfs
 def main_bfs(n, results):
-#
+
     win_graph = [[] for _ in range(n + 1)]
     loss_graph = [[] for _ in range(n + 1)]
 
