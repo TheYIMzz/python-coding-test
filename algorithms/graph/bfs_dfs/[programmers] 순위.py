@@ -23,6 +23,7 @@ def main_bfs(n, results):
     def bfs(start, graph):
 
         visited = [False] * (n + 1)
+        visited[start] = True
         queue = deque()
         queue.append(start)
 
@@ -92,4 +93,5 @@ def main_dfs(n, results):
     return answer
 
 print(main_bfs(n, results))
+print("=====================")
 print(main_dfs(n, results))
