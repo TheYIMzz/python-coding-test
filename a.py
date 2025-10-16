@@ -12,7 +12,7 @@ def solution():
     print('===============')
     def back_track(curr):
         # print(curr, len(tickets), len(curr))
-        if len(tickets) == len(curr):
+        if len(tickets)+1 == len(curr):
             answer.append(curr[:])
             return
 
