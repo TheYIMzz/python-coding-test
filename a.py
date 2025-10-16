@@ -9,7 +9,7 @@ def solution():
 
     for idx, t in enumerate(tickets):
         print(idx, t)
-
+    print('===============')
     def back_track(curr):
         # print(curr, len(tickets), len(curr))
         if len(tickets) == len(curr):
@@ -17,13 +17,15 @@ def solution():
             return
 
         for i in range(len(tickets)):
+            # print(i, curr)
             if not visited[i]:
 
-                if tickets[i][0] == curr[0]:
+                if tickets[i][0] == curr[-1]:
                     print('tickets[i][0] == curr: ', tickets[i][0], curr[0], i)
                     print('tickets[i][1]: ', tickets[i][1])
                     visited[i] = True
                     curr.append(tickets[i][1])
+                    # print(curr)
                     back_track(curr)
                     visited[i] = False
                     curr.pop()
