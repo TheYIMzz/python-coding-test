@@ -7,8 +7,8 @@ def solution():
     visited = [False] * len(tickets)
     answer = []
 
-    for t in tickets:
-        print(t)
+    for idx, t in enumerate(tickets):
+        print(idx, t)
 
     def back_track(curr):
         # print(curr, len(tickets), len(curr))
@@ -22,8 +22,10 @@ def solution():
                 if tickets[i][0] == curr[0]:
                     print('tickets[i][0] == curr: ', tickets[i][0], curr[0], i)
                     print('tickets[i][1]: ', tickets[i][1])
+                    visited[i] = True
                     curr.append(tickets[i][1])
                     back_track(curr)
+                    visited[i] = False
                     curr.pop()
 
     back_track([start])
