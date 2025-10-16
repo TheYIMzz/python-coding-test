@@ -1,40 +1,40 @@
-
+from collections import deque
 
 
 def solution():
 
-    tickets.sort()
-    visited = [False] * len(tickets)
-    answer = []
+    answer = 0
 
-    for idx, t in enumerate(tickets):
-        print(idx, t)
-    print('===============')
-    def back_track(curr):
-        # print(curr, len(tickets), len(curr))
-        if len(tickets)+1 == len(curr):
-            answer.append(curr[:])
-            return
+    row = len(maps)
+    col = len(maps[0])
 
-        for i in range(len(tickets)):
-            # print(i, curr)
-            if not visited[i]:
+    delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-                if tickets[i][0] == curr[-1]:
-                    print('tickets[i][0] == curr: ', tickets[i][0], curr[0], i)
-                    print('tickets[i][1]: ', tickets[i][1])
-                    visited[i] = True
-                    curr.append(tickets[i][1])
-                    # print(curr)
-                    back_track(curr)
-                    visited[i] = False
-                    curr.pop()
+    def bfs(r, c):
+        visited = [[False] * col for _ in range(row)]
+        visited[r][c] = True
+        queue = deque()
+        queue.append((r, c, 1))
 
-    back_track([start])
+        while queue:
+            cur_r, cur_c, depth = queue.popleft()
+
+            if cur_r == row - 1 and cur_c == col - 1:
+                return depth
+
+            for dr, dc in delta:
+                nr = dr + cur_r
+                nc = dc + cur_c
+
+                if 0 <= nr < row and 0 <= nc < col:
+                    if not visited[nr][nc]:
+                        visited[nr][nc] = True
+                        queue.append((nr, nc, depth + 1))
+
+
+    answer += bfs(0, 0)
 
     return answer
 
-start = "ICN"
-tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
-# tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
+maps = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]
 print(solution())
