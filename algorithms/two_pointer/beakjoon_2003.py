@@ -52,6 +52,7 @@ def solution():
         else:  # total > M
             total -= nums[start]   # 왼쪽 값을 빼서 합 줄이기
             start += 1          # 왼쪽 포인터 한 칸 이동
+    return count
 
 sys.stdin = io.StringIO("""4 2
 1 1 1 1
