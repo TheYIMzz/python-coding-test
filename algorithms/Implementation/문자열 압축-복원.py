@@ -62,23 +62,23 @@ def main():
 
         result = []
 
+        N = len(word)
         i = 0
-        while i < len(word):
+        while i < N:
             if word[i].isalpha():
                 j = i + 1
-                num_str = ""
+                count = ""
 
-                while j < len(word) and word[j].isdigit():
-                    num_str += word[j]
+                while j < N and word[j].isdigit():
+                    count += word[j]
                     j += 1
 
-                count = 0
-                if num_str:
-                    count = int(num_str)
+                print(word[i], count)
+                if count:
+                    result.append(word[i] * int(count))
                 else:
-                    count = 1
+                    result.append(word[i])
 
-                result.append(word[i] * count)
                 i = j  # i를 j로 갱신해서 숫자인건 건너뛰기
         print("".join(result))
 
