@@ -56,23 +56,31 @@ def main():
 
     # 복원
     def func_2(word):
+
         if not word:
             return ""
 
         result = []
 
-        for i in range(len(word)):
+        i = 0
+        while i < len(word):
+            if word[i].isalpha():
+                j = i + 1
+                num_str = ""
 
-            if word[i].isalpha(): # 알파벳이면
-                if i + 1 < len(word) and word[i + 1].isdigit(): # 뒤에 숫자 있으면 continue
-                    continue
-                else:  # 뒤에 숫자 없으면 바로 append
-                    result.append(word[i])
-            elif word[i].isdigit(): # 숫자면 이전 알파벳 * 현재 숫자 append
-                result.append(word[i - 1] * int(word[i]))
+                while j < len(word) and word[j].isdigit():
+                    num_str += word[j]
+                    j += 1
 
+                count = 0
+                if num_str:
+                    count = int(num_str)
+                else:
+                    count = 1
 
-        return "".join(result)
+                result.append(word[i] * count)
+                i = j  # i를 j로 갱신해서 숫자인건 건너뛰기
+        print("".join(result))
 
 
     print(f'압축 결과: {func_1(O)}')
@@ -81,5 +89,5 @@ def main():
 
 
 O = "aaabbcdee"
-O_1 = "a3b2cde"
+O_1 = "a3b2cde123"
 main()
