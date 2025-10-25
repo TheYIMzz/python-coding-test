@@ -4,7 +4,7 @@
     꼭대기에 도달하는 방법의 개수는 총 몇가지 일까요?
 
         input: n = 2
-        outputL: 2
+        output: 2
             1. 1 step + 1 step
             2. 2 steps
 
